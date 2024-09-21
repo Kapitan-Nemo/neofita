@@ -1,29 +1,47 @@
 <script setup lang="ts">
+import { getAuth, signOut } from 'firebase/auth'
+
 const auth = useAuth()
 const photo = ref()
 
+function singOut() {
+  signOut(getAuth())
+    .then(async () => {
+      useToast('Wylogowano z systemu', 'success')
+      auth.$reset()
+    })
+    .catch((error) => {
+      useToast(error, 'error')
+    })
+}
+
 onMounted(() => {
   photo.value = auth.userPhoto
+  console.log(auth.userName)
 })
 </script>
 
 <template>
   <nav class="w-full">
-    <div class="px-3 py-3 lg:px-5 lg:pl-3">
+    <div class="p-4">
       <div class="flex items-center justify-between">
         <div class="flex items-center justify-start">
           <div class="flex ml-2">
-            <span class="text-2xl text-white">Witaj</span>
+            <span class="text-2xl text-white">Witaj, {{ auth.userName }}</span>
           </div>
         </div>
-        <div class="flex items-center">
-          <button type="button" class="p-2">
-            <Icon class="text-red-300" size="30" name="ion:diamond-sharp" />
-          </button>
-
-          <div class="flex items-center ml-3">
-            <img class="w-8 h-8" :src="photo" alt="user photo">
-          </div>
+        <div class="flex gap-6 justify-center items-center">
+          <AppDropdown>
+            <template #trigger>
+              <Icon class="text-red-300 cursor-pointer" size="30" name="ion:settings-outline" />
+            </template>
+            <template #items>
+              <li class="px-4 py-2 text-black cursor-pointer" @click="singOut">
+                Logout
+              </li>
+            </template>
+          </AppDropdown>
+          <img class="w-8 h-8" :src="photo" alt="user photo">
         </div>
       </div>
     </div>

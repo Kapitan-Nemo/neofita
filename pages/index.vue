@@ -1,9 +1,5 @@
-<script setup lang="ts">
-// const { data: posts } = await useFetch('/api/posts')
-</script>
-
 <template>
-  <main class="container flex items-center justify-center p-4">
-    <img src="~/assets/img/rabbit.png" alt="Wake up Neo">
-  </main>
+  <div>
+    <AppLogin />
+  </div>
 </template>

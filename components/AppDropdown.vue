@@ -1,0 +1,38 @@
+<script setup lang="ts">
+import { onBeforeUnmount, onMounted, ref } from 'vue'
+
+const isDropdownVisible = ref(false)
+
+function toggleDropdown() {
+  isDropdownVisible.value = !isDropdownVisible.value
+}
+
+function handleClickOutside(event: MouseEvent) {
+  const dropdownElement = document.querySelector('.dropdown-container')
+  if (dropdownElement && !dropdownElement.contains(event.target as Node)) {
+    isDropdownVisible.value = false
+  }
+}
+
+onMounted(() => {
+  document.addEventListener('click', handleClickOutside)
+})
+
+onBeforeUnmount(() => {
+  document.removeEventListener('click', handleClickOutside)
+})
+</script>
+
+<template>
+  <div class="relative dropdown-container" @click="toggleDropdown">
+    <slot name="trigger" />
+    <div v-if="isDropdownVisible" class="absolute top-full mt-2 right-0 bg-white border rounded shadow-lg">
+      <ul>
+        <slot name="items" />
+      </ul>
+    </div>
+  </div>
+</template>
+
+<style scoped>
+</style>

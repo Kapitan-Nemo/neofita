@@ -31,9 +31,7 @@ export const useAuth = defineStore('auth', {
       })
     },
   },
-  persist: {
-    storage: persistedState.localStorage,
-  },
+  persist: true,
 })
 
 if (import.meta.hot)
