@@ -9,9 +9,8 @@ definePageMeta({
 
 <template>
   <div>
-    <AdminNav class="border-b" />
+    <AdminNav class="border-b border-gray-100" />
     <div class="flex">
-      <AdminAside class="border-r" />
       <div class="p-6 w-full" />
     </div>
   </div>
