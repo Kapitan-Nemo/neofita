@@ -1,14 +1,13 @@
 <template>
-  <div class="min-h-screen flex flex-col">
-    <AppHeader />
+  <main class="container flex flex-col min-h-screen">
     <NuxtPage class="flex-grow" />
     <AppFooter />
-  </div>
+  </main>
 </template>
 
 <style lang="scss">
 body {
-  @apply bg-primary;
+  @apply bg-black;
   color: #fff;
 }
 </style>

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { getAuth, GoogleAuthProvider, signInWithPopup, signOut } from 'firebase/auth'
+import { getAuth, GoogleAuthProvider, signInWithPopup } from 'firebase/auth'
 
 const auth = useAuth()
 const router = useRouter()
@@ -9,7 +9,7 @@ function singGoogle() {
   signInWithPopup(getAuth(), provider)
     .then(() => {
       router.push('/admin')
-      useToast('Poprawnie zalogowano do systemu', 'success')
+      useToast('Zalogowano do systemu', 'success')
     })
     .catch((error) => {
       useToast(error, 'error')
@@ -26,41 +26,22 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="mt-8">
-    <div v-if="!auth.logged" class="container flex items-center flex-col">
-      <div class="cursor-pointer" @click="singGoogle">
-        <button class="px-8 py-2 bg-white border-4 border-black text-black font-bold">
-          Zaloguj się za pomocą Google
+  <div class="flex justify-center items-center mt-6">
+    <div class="bg-gray p-6 rounded-lg flex justify-center items-center flex-col">
+      <img src="/assets/img/neofita.png" alt="logo" class="w-32 h-32">
+      <div v-if="!auth.logged" class="flex flex-col items-center gap-6">
+        <h1>Welcome back!</h1>
+        <button class="cursor-pointer px-8 py-2 border border-gray-100 rounded-lg text-white" @click="singGoogle">
+          Login with Google
         </button>
       </div>
-    </div>
-    <div v-else>
-      <div class="container flex items-center flex-col">
-        <button class="px-8 py-2 bg-white border-4 border-black text-black font-bold" @click="gotoPanel">
-          Jesteś zalogowany, kliknij aby przejść do panelu
-        </button>
+      <div v-else>
+        <div class="">
+          <button class="px-8 py-2 bg-white border-4 border-black text-black font-bold" @click="gotoPanel">
+            Go to panel
+          </button>
+        </div>
       </div>
     </div>
   </div>
 </template>
-
-<style lang="scss" scoped>
-.wave {
-  animation-name: wave-animation;
-  animation-duration: 2.5s;
-  animation-iteration-count: infinite;
-  transform-origin: 70% 70%;
-  display: inline-block;
-}
-
-@keyframes wave-animation {
-    0% { transform: rotate( 0.0deg) }
-   10% { transform: rotate(14.0deg) }
-   20% { transform: rotate(-8.0deg) }
-   30% { transform: rotate(14.0deg) }
-   40% { transform: rotate(-4.0deg) }
-   50% { transform: rotate(10.0deg) }
-   60% { transform: rotate( 0.0deg) }
-  100% { transform: rotate( 0.0deg) }
-}
-</style>

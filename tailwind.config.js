@@ -14,18 +14,28 @@ export default {
         // mono: ['Windows Command Prompt', ...defaultTheme.fontFamily.mono],
       },
       colors: {
-        primary: {
-          DEFAULT: '#0B0C10',
-          light: '#ebb0b437',
-          dark: '#DC8085',
+        black: {
+          DEFAULT: '#121212',
         },
         gray: {
-          DEFAULT: '#727271',
+          DEFAULT: '#1e1e1e',
+          100: '#454545',
         },
       },
       screens: {
         '2xl': '1400px',
       },
+      fontSize: {
+        h1: ['2.25rem', { lineHeight: '2.5rem' }], // 36px
+        h2: ['1.875rem', { lineHeight: '2.25rem' }], // 30px
+        h3: ['1.5rem', { lineHeight: '2rem' }], // 24px
+        h4: ['1.25rem', { lineHeight: '1.75rem' }], // 20px
+        h5: ['1rem', { lineHeight: '1.5rem' }], // 16px
+        h6: ['0.875rem', { lineHeight: '1.25rem' }], // 14px
+      },
     },
   },
+  plugins: [
+    require('@tailwindcss/typography'),
+  ],
 }
