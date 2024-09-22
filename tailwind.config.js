@@ -21,6 +21,9 @@ export default {
           DEFAULT: '#1e1e1e',
           100: '#454545',
         },
+        red: {
+          DEFAULT: '#cd1c21',
+        },
       },
       screens: {
         '2xl': '1400px',

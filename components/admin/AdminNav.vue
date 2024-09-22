@@ -8,7 +8,6 @@ const router = useRouter()
 function logout() {
   signOut(getAuth())
     .then(async () => {
-      useToast('Wylogowano z systemu', 'success')
       auth.$reset()
       router.push('/')
     })

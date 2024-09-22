@@ -1,0 +1,15 @@
+a {
+    @apply transition-all;
+}
+
+a:hover {
+    @apply text-red;
+}
+
+button {
+    @apply transition-all;
+}
+
+button:hover {
+    @apply text-red;
+}
