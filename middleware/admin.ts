@@ -1,14 +1,8 @@
 export default defineNuxtRouteMiddleware(async (to, from) => {
   const auth = useAuth()
-  const config = useRuntimeConfig()
 
   if (!auth.logged) {
-    await useToast('Spierdalaj z mojej ziemi!', 'error')
+    await useToast('Access denied', 'error')
     return navigateTo('/')
   }
-
-  // if (!auth.logged || config.public.FIREBASE_ADMINID !== auth.userID) {
-  //   await useToast('Spierdalaj z mojej ziemi!', 'error')
-  //   return navigateTo('/')
-  // }
 })
