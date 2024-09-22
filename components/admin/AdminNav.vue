@@ -50,14 +50,20 @@ onMounted(() => {
 
       <AppDropdown>
         <template #trigger>
-          <div class="flex items-center gap-6 cursor-pointer">
+          <div class="flex items-center gap-6 hover:text-red cursor-pointer">
             <img class="w-8 h-8 rounded-full" :src="photo" alt="user photo">
-            <span class="text-white">{{ auth.userName }}</span>
+            <span>{{ auth.userName }}</span>
+            <Icon size="30" name="ion:ios-bell-outline" />
           </div>
         </template>
         <template #items>
-          <li class="px-4 py-2 text-black cursor-pointer" @click="logout()">
+          <li class="flex items-center gap-4" @click="logout()">
+            <Icon size="20" name="ion:log-out-outline" />
             Logout
+          </li>
+          <li class="flex items-center gap-4">
+            <Icon size="20" name="ion:settings-outline" />
+            Settings
           </li>
         </template>
       </AppDropdown>
@@ -68,6 +74,8 @@ onMounted(() => {
 <style lang="css" scoped>
 .menu-link {
   @apply py-6;
+  @apply text-gray-200;
+  @apply hover:text-red;
 }
 .router-link-active  {
   @apply border-red;
@@ -75,4 +83,9 @@ onMounted(() => {
   @apply border-b-2;
   margin: 0 0 -1px 0;
 }
+li {
+    @apply py-2;
+    @apply cursor-pointer;
+    @apply hover:text-red;
+  }
 </style>

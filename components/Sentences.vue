@@ -30,7 +30,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <p :class="transitionClass" class="text-gray-100 mt-0 transition-all duration-1000">
+  <p :class="transitionClass" class="text-gray-200 mt-0 transition-all duration-1000">
     {{ latinSentences[currentSentenceIndex].sentence }}
   </p>
 </template>

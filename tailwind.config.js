@@ -20,6 +20,7 @@ export default {
         gray: {
           DEFAULT: '#1e1e1e',
           100: '#454545',
+          200: '#ABABAB',
         },
         red: {
           DEFAULT: '#cd1c21',
