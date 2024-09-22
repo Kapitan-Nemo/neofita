@@ -1,10 +1,24 @@
 <script setup lang="ts">
+import { getAuth, signOut } from 'firebase/auth'
+
 const auth = useAuth()
 const photo = ref()
+const router = useRouter()
+
+function logout() {
+  signOut(getAuth())
+    .then(async () => {
+      useToast('Wylogowano z systemu', 'success')
+      auth.$reset()
+      router.push('/')
+    })
+    .catch((error) => {
+      useToast(error, 'error')
+    })
+}
 
 onMounted(() => {
   photo.value = auth.userPhoto
-  console.log(auth.userName)
 })
 </script>
 
