@@ -1,19 +1,6 @@
 <script setup lang="ts">
-import { getAuth, signOut } from 'firebase/auth'
-
 const auth = useAuth()
 const photo = ref()
-
-function singOut() {
-  signOut(getAuth())
-    .then(async () => {
-      useToast('Wylogowano z systemu', 'success')
-      auth.$reset()
-    })
-    .catch((error) => {
-      useToast(error, 'error')
-    })
-}
 
 onMounted(() => {
   photo.value = auth.userPhoto
@@ -36,7 +23,7 @@ onMounted(() => {
               <Icon class="text-red-300 cursor-pointer" size="30" name="ion:settings-outline" />
             </template>
             <template #items>
-              <li class="px-4 py-2 text-black cursor-pointer" @click="singOut">
+              <li class="px-4 py-2 text-black cursor-pointer" @click="logout()">
                 Logout
               </li>
             </template>
