@@ -15,17 +15,17 @@ defineProps<{
 </script>
 
 <template>
-  <div class="border border-gray-300 p-4 rounded-lg">
+  <div class="bg-gray p-4 rounded-lg">
     <div class="flex justify-between items-center">
       <div>
-        <h1 class="text-xl font-bold">
+        <h2 class="">
           {{ title }}
-        </h1>
-        <h2 class="text-sm text-gray-600">
-          {{ subtitle }}
         </h2>
+        <p class="text-gray-200">
+          {{ subtitle }}
+        </p>
       </div>
-      <button class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
+      <button class="px-4 py-2 border border-gray-100 text-white rounded">
         {{ buttonText }}
       </button>
     </div>
