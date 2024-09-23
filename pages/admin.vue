@@ -11,11 +11,11 @@ definePageMeta({
   <div>
     <Nav class="border-b border-gray-100" />
     <div class="flex">
-      <div class="p-6 w-full">
-        <Tile title="Admin" subtitle="Manage your site" button-text="Create new user">
+      <div class="py-6 w-1/3">
+        <Tile title="Revenue" subtitle="Data from 1-12 Apr, 2024" button-text="View Report">
           <div>
             <p>
-              You can manage your site here.
+              Content
             </p>
           </div>
         </tile>
