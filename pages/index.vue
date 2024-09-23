@@ -1,5 +1,5 @@
 <template>
   <div>
-    <AppLogin />
+    <Login />
   </div>
 </template>
