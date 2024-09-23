@@ -49,7 +49,7 @@ onMounted(() => {
         </nuxt-link>
       </div>
 
-      <AppDropdown>
+      <Dropdown>
         <template #trigger>
           <div class="flex items-center gap-6 hover:text-red cursor-pointer">
             <img class="w-8 h-8 rounded-full" :src="photo" alt="user photo">
@@ -67,7 +67,7 @@ onMounted(() => {
             Logout
           </li>
         </template>
-      </AppDropdown>
+      </Dropdown>
     </div>
   </nav>
 </template>
