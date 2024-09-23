@@ -10,6 +10,7 @@ function logout() {
     .then(async () => {
       auth.$reset()
       router.push('/')
+      useToast('You have been logged out', 'success')
     })
     .catch((error) => {
       useToast(error, 'error')
@@ -57,13 +58,13 @@ onMounted(() => {
           </div>
         </template>
         <template #items>
-          <li class="flex items-center gap-4" @click="logout()">
-            <Icon size="20" name="ion:log-out-outline" />
-            Logout
-          </li>
           <li class="flex items-center gap-4">
             <Icon size="20" name="ion:settings-outline" />
             Settings
+          </li>
+          <li class="flex items-center gap-4" @click="logout()">
+            <Icon size="20" name="ion:log-out-outline" />
+            Logout
           </li>
         </template>
       </AppDropdown>

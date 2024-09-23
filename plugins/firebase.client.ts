@@ -1,8 +1,8 @@
-import { getFirestore } from 'firebase/firestore'
-import { initializeApp } from 'firebase/app'
 import { getAnalytics } from 'firebase/analytics'
-import { getStorage } from 'firebase/storage'
+import { initializeApp } from 'firebase/app'
 import { getAuth } from 'firebase/auth'
+import { getFirestore } from 'firebase/firestore'
+import { getStorage } from 'firebase/storage'
 import { defineNuxtPlugin } from 'nuxt/app'
 
 export default defineNuxtPlugin(() => {

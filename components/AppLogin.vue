@@ -9,6 +9,7 @@ function singGoogle() {
   signInWithPopup(getAuth(), provider)
     .then(() => {
       router.push('/admin')
+      useToast('Welcome to the Ninth Gate', 'success')
     })
     .catch((error) => {
       useToast(error, 'error')
