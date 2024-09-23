@@ -27,10 +27,10 @@ export default defineNuxtConfig({
   imports: {
     dirs: ['./stores'],
   },
-  components: [
-    { path: '~/components/admin', prefix: 'Admin' },
-    '~/components',
-  ],
+  // components: [
+  //   { path: '~/components/dashboard', prefix: 'Dashboard' },
+  //   '~/components',
+  // ],
   css: [
     '~/assets/scss/global.scss',
   ],
