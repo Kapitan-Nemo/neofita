@@ -58,11 +58,11 @@ onMounted(() => {
           </div>
         </template>
         <template #items>
-          <li class="flex items-center gap-4">
+          <li class="flex items-center p-6 gap-4 text-gray-200 border-b border-gray-100">
             <Icon size="20" name="ion:settings-outline" />
             Settings
           </li>
-          <li class="flex items-center gap-4" @click="logout()">
+          <li class="" @click="logout()">
             <Icon size="20" name="ion:log-out-outline" />
             Logout
           </li>
@@ -85,8 +85,8 @@ onMounted(() => {
   margin: 0 0 -1px 0;
 }
 li {
-    @apply py-2;
     @apply cursor-pointer;
     @apply hover:text-red;
+    @apply flex items-center p-4 gap-4 text-gray-200;
   }
 </style>

@@ -26,8 +26,8 @@ onBeforeUnmount(() => {
 <template>
   <div class="relative dropdown-container" @click="toggleDropdown">
     <slot name="trigger" />
-    <div :class="{ 'opacity-100': isDropdownVisible, 'opacity-0': !isDropdownVisible }" class="w-full absolute top-full mt-8 right-0 border-white border bg-black rounded shadow-lg transition-opacity duration-300">
-      <ul class="px-6 py-2 ">
+    <div :class="{ 'opacity-100': isDropdownVisible, 'opacity-0': !isDropdownVisible }" class="w-full absolute top-full mt-8 right-0 border-gray-100 border bg-gray rounded shadow-lg transition-opacity duration-300">
+      <ul>
         <slot name="items" />
       </ul>
     </div>
