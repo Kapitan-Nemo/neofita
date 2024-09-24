@@ -8,7 +8,7 @@ function singGoogle() {
   const provider = new GoogleAuthProvider()
   signInWithPopup(getAuth(), provider)
     .then(() => {
-      router.push('/admin')
+      router.push('/dashboard')
       useToast('Welcome to the Ninth Gate', 'success')
     })
     .catch((error) => {
@@ -17,7 +17,7 @@ function singGoogle() {
 }
 
 function gotoPanel() {
-  router.push('/admin')
+  router.push('/dashboard')
 }
 
 onMounted(() => {

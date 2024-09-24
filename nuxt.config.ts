@@ -25,7 +25,7 @@ export default defineNuxtConfig({
     // Homepage pre-rendered at build time
     '/': { prerender: true },
     // Admin dashboard renders only on client-side
-    '/admin/**': { ssr: false },
+    '/dashboard/**': { ssr: false },
   },
   pinia: {
     storesDirs: ['./stores/**'],

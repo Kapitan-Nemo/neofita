@@ -26,13 +26,13 @@ onMounted(() => {
   <nav class="w-full my-6">
     <div class="flex items-center justify-between">
       <div>
-        <nuxt-link to="/admin">
+        <nuxt-link to="/dashboard">
           <img class="w-14 h-14" src="/assets/img/neofita.png" alt="logo">
         </nuxt-link>
       </div>
 
       <div class="flex gap-12">
-        <nuxt-link to="/admin" class="menu-link">
+        <nuxt-link to="/dashboard" class="menu-link">
           Dashboard
         </nuxt-link>
         <nuxt-link to="/" class="menu-link">
