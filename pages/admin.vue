@@ -32,14 +32,15 @@ const showDatePicker = ref(false)
           </p>
         </div>
 
-        <div class="flex bg-gray rounded-lg border border-gray-100">
+        <div class="flex bg-gray rounded-lg border border-gray-100 relative">
           <p class="border-r py-2 px-4 border-gray-100 text-gray-200">
             Showing data
           </p>
-          <p class="text-gray-200 py-2 px-4" @click="showDatePicker = !showDatePicker">
+          <p class="text-gray-200 py-2 px-4 cursor-pointer gap-4 flex hover:text-red transition-all" @click="showDatePicker = !showDatePicker">
             {{ selectedDates.start }} - {{ selectedDates.end }}
+            <Icon size="20" name="ion:calendar-sharp" />
           </p>
-          <div class="absolute bottom-0">
+          <div class="absolute top-16 right-0">
             <VDatePicker v-if="showDatePicker" v-model="selectedDates" is-range is-dark />
           </div>
         </div>
