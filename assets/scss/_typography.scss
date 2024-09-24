@@ -13,3 +13,11 @@ button {
 button:hover {
     @apply text-red;
 }
+
+li {
+    @apply transition-all;
+}
+
+li:hover {
+    @apply text-red;
+}

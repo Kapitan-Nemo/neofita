@@ -18,7 +18,7 @@ defineProps<{
   <div class="bg-gray p-6 rounded-lg">
     <div class="flex justify-between items-start">
       <div class="flex flex-col gap-1">
-        <h2 class="text-2xl font-bold">
+        <h2 class="text-2xl">
           {{ title }}
         </h2>
         <p class="text-gray-200 text-sm">
