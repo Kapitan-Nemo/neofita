@@ -3,7 +3,7 @@ const auth = useAuth()
 
 function formatDate(date: Date): string {
   const day = String(date.getDate()).padStart(2, '0')
-  const month = String(date.getMonth() + 1).padStart(2, '0') // Months are zero-based
+  const month = String(date.getMonth() + 1).padStart(2, '0')
   const year = date.getFullYear()
   return `${day}-${month}-${year}`
 }
@@ -41,7 +41,7 @@ const showDatePicker = ref(false)
             <Icon size="20" name="ion:calendar-sharp" />
           </p>
           <div class="absolute top-16 right-0">
-            <VDatePicker v-if="showDatePicker" v-model="selectedDates" is-range is-dark />
+            <VDatePicker v-if="showDatePicker" v-model="selectedDates" transparent color="red" is-range is-dark />
           </div>
         </div>
       </div>
