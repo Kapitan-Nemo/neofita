@@ -13,8 +13,8 @@ const start = new Date(now.getFullYear(), now.getMonth(), 1)
 const end = new Date(now.getFullYear(), now.getMonth() + 1, 0)
 
 const selectedDates = ref({
-  start: formatDate(start),
-  end: formatDate(end),
+  start,
+  end,
 })
 
 const showDatePicker = ref(false)
@@ -37,7 +37,7 @@ const showDatePicker = ref(false)
             Showing data
           </p>
           <p class="text-gray-200 py-2 px-4 cursor-pointer gap-4 flex hover:text-red transition-all" @click="showDatePicker = !showDatePicker">
-            {{ selectedDates.start }} - {{ selectedDates.end }}
+            {{ formatDate(selectedDates.start) }} - {{ formatDate(selectedDates.end) }}
             <Icon size="20" name="ion:calendar-sharp" />
           </p>
           <div class="absolute top-16 right-0">
