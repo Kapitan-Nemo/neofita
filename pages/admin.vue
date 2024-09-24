@@ -1,11 +1,23 @@
 <script setup lang="ts">
 const auth = useAuth()
-definePageMeta({
-  layout: false,
-  middleware: [
-    'admin',
-  ],
+
+function formatDate(date: Date): string {
+  const day = String(date.getDate()).padStart(2, '0')
+  const month = String(date.getMonth() + 1).padStart(2, '0') // Months are zero-based
+  const year = date.getFullYear()
+  return `${day}-${month}-${year}`
+}
+
+const now = new Date()
+const start = new Date(now.getFullYear(), now.getMonth(), 1)
+const end = new Date(now.getFullYear(), now.getMonth() + 1, 0)
+
+const selectedDates = ref({
+  start: formatDate(start),
+  end: formatDate(end),
 })
+
+const showDatePicker = ref(false)
 </script>
 
 <template>
@@ -16,13 +28,21 @@ definePageMeta({
         <div class="flex flex-col gap-1">
           <h1>Dashboard</h1>
           <p class="text-sm text-gray-200">
-            Hi, {{ auth.userName }} here are your finanancial stats
+            Hi, {{ auth.userName }} here are your financial stats
           </p>
         </div>
 
-        <button>
-          Add New
-        </button>
+        <div class="flex bg-gray rounded-lg border border-gray-100">
+          <p class="border-r py-2 px-4 border-gray-100 text-gray-200">
+            Showing data
+          </p>
+          <p class="text-gray-200 py-2 px-4" @click="showDatePicker = !showDatePicker">
+            {{ selectedDates.start }} - {{ selectedDates.end }}
+          </p>
+          <div class="absolute bottom-0">
+            <VDatePicker v-if="showDatePicker" v-model="selectedDates" is-range is-dark />
+          </div>
+        </div>
       </div>
 
       <div class="py-6 w-1/3">
@@ -32,7 +52,7 @@ definePageMeta({
               Content
             </p>
           </div>
-        </tile>
+        </Tile>
       </div>
     </div>
   </div>
