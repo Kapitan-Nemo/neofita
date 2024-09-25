@@ -33,6 +33,17 @@ export default defineNuxtConfig({
   imports: {
     dirs: ['./stores'],
   },
+  vite: {
+    css: {
+      // for some reason, disabling it here doesn't seem to work.
+      // devSourcemap: false,
+      preprocessorOptions: {
+        scss: {
+          api: 'modern-compiler',
+        },
+      },
+    },
+  },
   // components: [
   //   { path: '~/components/dashboard', prefix: 'Dashboard' },
   //   '~/components',

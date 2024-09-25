@@ -19,20 +19,14 @@ const dateStore = useDateStore()
 
       <div class="flex gap-6">
         <div class="py-6 w-1/3">
-          <Tile title="Revenue" subtitle="Data from 1-12 Apr, 2024" button-text="View Report">
-            <div>
-              <Chart />
-            </div>
+          <Tile title="Revenue" :subtitle="`Data from ${dateStore.formatDateRange(dateStore.selectedDates.start, dateStore.selectedDates.end)}`" button-text="View Report">
+            <ChartLine />
           </Tile>
         </div>
 
         <div class="py-6 w-1/3">
-          <Tile title="Revenue" :subtitle="`Data from ${dateStore.formatDateRange(dateStore.selectedDates.start, dateStore.selectedDates.end)}`" button-text="View Report">
-            <div>
-              <p>
-                Content 2
-              </p>
-            </div>
+          <Tile title="Daily Expenses" :subtitle="`Data from ${dateStore.formatDateRange(dateStore.selectedDates.start, dateStore.selectedDates.end)}`" button-text="View Report">
+            <ChartBar />
           </Tile>
         </div>
 
