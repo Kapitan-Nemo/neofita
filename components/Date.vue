@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { ref } from 'vue'
-
 const dateStore = useDateStore()
 const showDatePicker = ref(false)
 </script>
