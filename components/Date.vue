@@ -13,7 +13,7 @@ const showDatePicker = ref(false)
       <Icon size="20" name="ion:calendar-sharp" />
     </p>
     <div class="absolute top-16 right-0">
-      <VDatePicker v-if="showDatePicker" v-model="dateStore.selectedDates" transparent color="red" is-range is-dark />
+      <VDatePicker v-if="showDatePicker" v-model="dateStore.selectedDates" :style="{ backgroundColor: '#1e1e1e', border: '1px solid #454545' }" color="red" is-range is-dark />
     </div>
   </div>
 </template>
