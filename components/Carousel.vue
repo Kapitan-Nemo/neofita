@@ -68,6 +68,7 @@ onUnmounted(() => {
 }
 
 .slideshow img {
+  max-height: 420px;
   height: auto; /* Adjust to your desired height */
   width: 300px; /* Adjust to your desired width */
   border-radius: 20px;

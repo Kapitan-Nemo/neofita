@@ -35,8 +35,6 @@ export default defineNuxtConfig({
   },
   vite: {
     css: {
-      // for some reason, disabling it here doesn't seem to work.
-      // devSourcemap: false,
       preprocessorOptions: {
         scss: {
           api: 'modern-compiler',

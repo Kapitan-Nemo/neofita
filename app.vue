@@ -1,5 +1,5 @@
 <template>
-  <main class="container flex flex-col min-h-screen">
+  <main class="container flex flex-col min-h-dvh">
     <NuxtPage class="flex-grow" />
     <Footer />
   </main>

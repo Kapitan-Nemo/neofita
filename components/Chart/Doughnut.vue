@@ -64,9 +64,9 @@ const categories = computed(() => {
       <div class="flex flex-col">
         <div v-for="(category, index) in categories" :key="index" class="flex items-center gap-4 pt-4 pb-4" :class="[{ 'border-b border-dotted border-gray-100': index !== categories.length - 1 }]">
           <div :style="{ backgroundColor: category.color }" class="w-2 h-2 rounded-full" />
-          <div class="flex justify-between items-center">
+          <div class="flex justify-between w-full items-center">
             <span class="text-sm flex">{{ category.label }}</span>
-            <span class="text-xs flex">{{ category.percentage }}%</span>
+            <span class="text-xs flex text-gray-200">{{ category.percentage }} %</span>
           </div>
         </div>
       </div>

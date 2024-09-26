@@ -28,7 +28,7 @@ onMounted(() => {
 <template>
   <div class="flex flex-col justify-center items-center mt-6">
     <div class="p-6 gap-6 rounded-lg flex justify-center items-center flex-col transition-all">
-      <img src="/assets/img/neofita.png" alt="logo" class="w-40 h-40">
+      <img src="/assets/img/neofita.png" alt="logo" class="w-24 h-24">
       <div class="flex flex-col items-center gap-6">
         <div class="flex flex-col items-center">
           <Sentences />
