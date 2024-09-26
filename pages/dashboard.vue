@@ -1,6 +1,10 @@
 <script setup lang="ts">
 const auth = useAuth()
 const dateStore = useDateStore()
+
+definePageMeta({
+  middleware: ['auth'],
+})
 </script>
 
 <template>
@@ -17,24 +21,36 @@ const dateStore = useDateStore()
         <Date />
       </div>
 
-      <div class="flex gap-6">
-        <div class="py-6 w-1/3">
+      <div class="flex py-6 gap-6">
+        <div class="w-1/3">
           <Tile title="Revenue" :subtitle="`Data from ${dateStore.formatDateRange(dateStore.selectedDates.start, dateStore.selectedDates.end)}`" button-text="View Report">
             <ChartLine />
           </Tile>
         </div>
 
-        <div class="py-6 w-1/3">
+        <div class="w-1/3">
           <Tile title="Daily Expenses" :subtitle="`Data from ${dateStore.formatDateRange(dateStore.selectedDates.start, dateStore.selectedDates.end)}`" button-text="View Report">
             <ChartBar />
           </Tile>
         </div>
 
-        <div class="py-6 w-1/3">
+        <div class="w-1/3">
           <Tile title="Summary" :subtitle="`Data from ${dateStore.formatDateRange(dateStore.selectedDates.start, dateStore.selectedDates.end)}`" button-text="View Report">
             <ChartDoughnut />
           </Tile>
         </div>
+      </div>
+    </div>
+    <div class="flex pb-6 gap-6">
+      <div class="w-2/3">
+        <Tile title="Daily Transactions" :subtitle="`Data from ${dateStore.formatDateRange(dateStore.selectedDates.start, dateStore.selectedDates.end)}`" button-text="View Report">
+          <TableTransactions />
+        </Tile>
+      </div>
+      <div class="w-1/3">
+        <Tile title="Saving Goal" :subtitle="`Data from ${dateStore.formatDateRange(dateStore.selectedDates.start, dateStore.selectedDates.end)}`" button-text="View Report">
+          <p>Coming soon...</p>
+        </Tile>
       </div>
     </div>
   </div>

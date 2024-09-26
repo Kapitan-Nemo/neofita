@@ -21,6 +21,7 @@ export default {
           DEFAULT: '#1e1e1e',
           100: '#454545',
           200: '#ABABAB',
+          300: '#242424',
         },
         red: {
           DEFAULT: '#cd1c21',
