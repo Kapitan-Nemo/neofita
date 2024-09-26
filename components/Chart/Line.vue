@@ -51,7 +51,7 @@ const chartOptions = ref({
       id="my-chart-id"
       :options="chartOptions"
       :data="chartData"
-      :height="250"
+      :height="165"
     />
   </div>
 </template>
