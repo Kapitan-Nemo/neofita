@@ -32,11 +32,7 @@ const dateStore = useDateStore()
 
         <div class="py-6 w-1/3">
           <Tile title="Revenue" subtitle="Data from 1-12 Apr, 2024" button-text="View Report">
-            <div>
-              <p>
-                Content 3
-              </p>
-            </div>
+            <ChartDoughnut />
           </Tile>
         </div>
       </div>
