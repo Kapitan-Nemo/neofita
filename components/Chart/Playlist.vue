@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { filename } from 'pathe/utils'
-import { computed } from 'vue'
 
 const playlist = [
   {
