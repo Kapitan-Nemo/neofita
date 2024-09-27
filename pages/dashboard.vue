@@ -47,9 +47,16 @@ definePageMeta({
           <TableTransactions />
         </Tile>
       </div>
-      <div class="w-1/3">
-        <Tile title="Saving Goal" subtitle="50% Progress" button-text="View Report">
+      <div class="w-1/3 flex flex-col gap-6">
+        <Tile class="flex flex-col gap-4" title="Saving Goal" subtitle="75% Progress" button-text="View Report">
+          <p class="text-2xl mb-2">
+            $1052.98 <span class="text-sm text-gray-200"><span class="mx-1">of</span> $1,200</span>
+          </p>
           <ChartRange />
+        </Tile>
+
+        <Tile class="bg-[#191919] h-full">
+          <ChartPlaylist />
         </Tile>
       </div>
     </div>

@@ -1,7 +1,7 @@
 <script setup>
 const emit = defineEmits(['update:modelValue'])
 
-const sliderValue = ref(50)
+const sliderValue = ref(75)
 const slider = ref(null)
 
 function getProgress(value, min, max) {
