@@ -48,8 +48,8 @@ definePageMeta({
         </Tile>
       </div>
       <div class="w-1/3">
-        <Tile title="Saving Goal" :subtitle="`Data from ${dateStore.formatDateRange(dateStore.selectedDates.start, dateStore.selectedDates.end)}`" button-text="View Report">
-          <p>Coming soon...</p>
+        <Tile title="Saving Goal" subtitle="50% Progress" button-text="View Report">
+          <ChartRange />
         </Tile>
       </div>
     </div>
