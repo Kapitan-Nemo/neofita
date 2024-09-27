@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { CategoryScale, Chart as ChartJS, Legend, LinearScale, LineElement, PointElement, Title, Tooltip } from 'chart.js'
+import { CategoryScale, Chart as ChartJS, Filler, Legend, LinearScale, LineElement, PointElement, Title, Tooltip } from 'chart.js'
 import { Line } from 'vue-chartjs'
 
-ChartJS.register(Title, Tooltip, Legend, LineElement, PointElement, CategoryScale, LinearScale)
+ChartJS.register(Title, Tooltip, Legend, LineElement, PointElement, CategoryScale, LinearScale, Filler)
 
 // Generate labels for days from 01.09.2024 to 12.09.2024
 const labels = Array.from({ length: 12 }, (_, i) => `${i + 1}.09.2024`)
