@@ -4,25 +4,19 @@ import { computed } from 'vue'
 
 const playlist = [
   {
-    title: 'The Dead Shall Inherit the Earth',
-    subtitle: 'Undead Dark Ambience for Silent Nights',
-    link: 'https://www.youtube.com/watch?v=gcDt6UJwfgk',
-    image: 'the_dead_shall_inherit_the_earth.jpg',
-  },
-  {
-    title: 'Trollslottet - Evigheten',
+    title: 'Evigheten',
     subtitle: 'We built towers to visit them in their divine fortress, but heaven was empty.',
     link: 'https://www.youtube.com/watch?v=1zVXHocw9Ro',
     image: 'evigheten.jpg',
   },
   {
-    title: 'Mountain Realm - Shadowlorn',
-    subtitle: 'As the last wisps of sunlight fade, the Whitebark forest succumbs to the Shadowlorns dark grasp.',
+    title: 'Shadowlorn',
+    subtitle: 'As the last wisps of sunlight fade, the Whitebark forest.',
     link: 'https://www.youtube.com/watch?v=QyYOrvygOzA',
     image: 'shadowlorn.jpg',
   },
   {
-    title: 'Trollslottet - Sorgeberget',
+    title: 'Sorgeberget',
     subtitle: 'In this age of malevolence and turmoil, the gods are long gone.',
     link: 'https://www.youtube.com/watch?v=x-m39xXwq1A',
     image: 'sorgeberget.jpg',
