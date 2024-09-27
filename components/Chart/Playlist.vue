@@ -4,6 +4,12 @@ import { computed } from 'vue'
 
 const playlist = [
   {
+    title: 'The Dead Shall Inherit the Earth',
+    subtitle: 'Undead Dark Ambience for Silent Nights',
+    link: 'https://www.youtube.com/watch?v=gcDt6UJwfgk',
+    image: 'the_dead_shall_inherit_the_earth.jpg',
+  },
+  {
     title: 'Trollslottet - Evigheten',
     subtitle: 'We built towers to visit them in their divine fortress, but heaven was empty.',
     link: 'https://www.youtube.com/watch?v=1zVXHocw9Ro',
