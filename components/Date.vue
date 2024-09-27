@@ -9,11 +9,9 @@ const dateStore = useDateStore()
     </p>
 
     <VDatePicker
-      v-model="dateStore.selectedDates"
-      expanded
+      v-model.range="dateStore.selectedDates"
       :style="{ backgroundColor: '#1e1e1e', border: '1px solid #454545' }"
       color="red"
-      is-range
       is-dark
     >
       <template #default="{ togglePopover }">
