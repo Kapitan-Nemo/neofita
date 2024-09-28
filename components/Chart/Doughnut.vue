@@ -2,7 +2,29 @@
 import { ArcElement, CategoryScale, Chart as ChartJS, DoughnutController, Legend, Title, Tooltip } from 'chart.js'
 import { Doughnut } from 'vue-chartjs'
 
-ChartJS.register(DoughnutController, ArcElement, Title, Tooltip, Legend, CategoryScale)
+// Custom plugin to display text in the center of the doughnut chart
+const centerTextPlugin = {
+  id: 'centerText',
+  beforeDraw(chart: any) {
+    if (chart.config.type !== 'doughnut')
+      return // Only apply to doughnut charts
+    const { ctx, width, height } = chart
+    ctx.restore()
+    const fontSize = (height / 114).toFixed(2)
+    ctx.font = `${fontSize}em Montserrat`
+    ctx.textBaseline = 'middle'
+    ctx.fillStyle = '#FFF' // Set text color to white
+
+    const text = '$8,295'
+    const textX = Math.round((width - ctx.measureText(text).width) / 2)
+    const textY = height / 2
+
+    ctx.fillText(text, textX, textY)
+    ctx.save()
+  },
+}
+
+ChartJS.register(DoughnutController, ArcElement, Title, Tooltip, Legend, CategoryScale, centerTextPlugin)
 
 // Example data for different categories
 const foodAndDrinkData = Math.floor(Math.random() * 100)
@@ -35,6 +57,7 @@ const chartOptions = ref({
     legend: {
       display: false,
     },
+    centerText: {}, // Enable the custom plugin
   },
   cutout: '90%', // Thin doughnut border
 })
@@ -55,7 +78,7 @@ const categories = computed(() => {
   <div class="chart-container flex gap-6">
     <div class="w-1/2">
       <Doughnut
-        id="my-chart-id"
+        id="summary-chart"
         :options="chartOptions"
         :data="chartData"
       />
