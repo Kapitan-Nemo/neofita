@@ -45,10 +45,9 @@ export default defineNuxtConfig({
       },
     },
   },
-  // components: [
-  //   { path: '~/components/dashboard', prefix: 'Dashboard' },
-  //   '~/components',
-  // ],
+  app: {
+    pageTransition: { name: 'page', mode: 'out-in' },
+  },
   css: [
     '~/assets/scss/global.scss',
   ],
