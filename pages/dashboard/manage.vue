@@ -10,7 +10,7 @@ definePageMeta({
     <div class="flex flex-col">
       <div class="py-6 flex flex-row justify-between items-center">
         <div class="flex flex-col gap-1">
-          <h1>Add or Edit finances</h1>
+          <h1>Add / Edit finances</h1>
           <p class="text-sm text-gray-200 flex items-center">
             <NuxtLink to="/dashboard/">
               Dashboard
@@ -18,6 +18,18 @@ definePageMeta({
               Manage
             </NuxtLink>
           </p>
+        </div>
+      </div>
+      <div class="flex-row flex gap-6">
+        <div class="w-2/3">
+          <Tile class="w-[904px]" title="Manage Transactions" button-text="Add transaction">
+            <TransactionList />
+          </Tile>
+        </div>
+        <div class="w-1/3">
+          <Tile class="" title="Manage Categories" button-text="Add category">
+            <TransactionCategory />
+          </Tile>
         </div>
       </div>
     </div>
