@@ -1,19 +1,36 @@
 <script setup lang="ts">
 import { getAuth, GoogleAuthProvider, signInWithPopup } from 'firebase/auth'
+import { doc, setDoc } from 'firebase/firestore'
 
 const auth = useAuth()
 const router = useRouter()
+const firestore = useNuxtApp().$firestore
 
-function singGoogle() {
+async function singGoogle() {
   const provider = new GoogleAuthProvider()
-  signInWithPopup(getAuth(), provider)
-    .then(() => {
-      router.push('/dashboard')
-      useToast('Welcome to the Ninth Gate', 'success')
+  try {
+    const result = await signInWithPopup(getAuth(), provider)
+    const user = result.user
+
+    // Store user data in Firestore
+    await setDoc(doc(firestore, 'users-data', user.uid), {
+      uid: user.uid,
+      email: user.email,
+      displayName: user.displayName,
+      photoURL: user.photoURL,
     })
-    .catch((error) => {
-      useToast(error, 'error')
-    })
+
+    router.push('/dashboard')
+    useToast('Welcome to the Ninth Gate', 'success')
+  }
+  catch (error) {
+    if (error instanceof Error) {
+      useToast(error.message, 'error')
+    }
+    else {
+      useToast('An unknown error occurred', 'error')
+    }
+  }
 }
 
 function gotoPanel() {

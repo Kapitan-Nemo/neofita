@@ -44,7 +44,7 @@ definePageMeta({
     <div class="flex pb-6 gap-6">
       <div class="w-2/3">
         <Tile class="w-[904px]" title="Daily Transactions" :subtitle="`Data from ${dateStore.formatDateRange(dateStore.selectedDates.start, dateStore.selectedDates.end)}`" button-text="View Report">
-          <TableTransactions />
+          <TransactionList />
         </Tile>
       </div>
       <div class="w-1/3 flex flex-col gap-6">
