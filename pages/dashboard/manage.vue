@@ -20,14 +20,14 @@ definePageMeta({
           </p>
         </div>
       </div>
-      <div class="flex-row flex gap-6">
+      <div class="flex-row flex gap-6 py-6">
         <div class="w-2/3">
-          <Tile class="w-[904px]" title="Manage Transactions" button-text="Add transaction">
+          <Tile class="w-[904px]" title="Transactions" button-text="Add transaction">
             <TransactionList />
           </Tile>
         </div>
         <div class="w-1/3">
-          <Tile class="" title="Manage Categories" button-text="Add category">
+          <Tile class="" title="Categories" button-text="Add category">
             <TransactionCategory />
           </Tile>
         </div>
