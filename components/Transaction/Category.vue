@@ -55,7 +55,7 @@ onMounted(() => {
           <Icon size="20" name="ion:edit" />
         </span>
         <span class="p-2 border flex items-center hover:text-red cursor-pointer transition-all border-gray-100 rounded-lg">
-          <Icon size="20" name="ion:trash-outline" class="" />
+          <Icon size="20" name="ion:trash-outline" />
         </span>
       </div>
     </div>

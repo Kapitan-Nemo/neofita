@@ -3,6 +3,8 @@ defineProps<Partial<{
   title: string
   subtitle: string
   buttonText: string
+  buttonAction: string
+  link: string
 }>>()
 
 // const emit = defineEmits<{
@@ -25,9 +27,14 @@ defineProps<Partial<{
           {{ subtitle }}
         </p>
       </div>
-      <button v-if="buttonText" class="px-4 py-2 text-sm border border-gray-100 text-white rounded">
-        {{ buttonText }}
-      </button>
+      <div class="flex gap-4">
+        <NuxtLink v-if="buttonAction && link" :to="link" class="flex items-center gap-4 px-4 py-2 text-sm border border-gray-100 text-white rounded">
+          {{ buttonAction }}<Icon name="ion:edit" />
+        </NuxtLink>
+        <button v-if="buttonText" class="px-4 py-2 text-sm border border-gray-100 text-white rounded">
+          {{ buttonText }}
+        </button>
+      </div>
     </div>
     <div class="mt-4">
       <slot />
