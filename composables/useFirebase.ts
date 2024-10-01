@@ -1,4 +1,4 @@
-import { addDoc, collection, doc, getDocs, updateDoc } from 'firebase/firestore'
+import { addDoc, collection, deleteDoc, doc, getDocs, updateDoc } from 'firebase/firestore'
 
 export function useFirebase() {
   const firestore = useNuxtApp().$firestore
@@ -30,5 +30,12 @@ export function useFirebase() {
     })
   }
 
-  return { categories, createCategory, updateCategory, fetchCategories }
+  async function deleteCategory(id: string) {
+    if (!auth)
+      throw new Error('User not authenticated')
+    const categoryRef = doc(firestore, `users-data/${auth.userID}/finance-category`, id)
+    await deleteDoc(categoryRef)
+  }
+
+  return { categories, createCategory, updateCategory, deleteCategory, fetchCategories }
 }
