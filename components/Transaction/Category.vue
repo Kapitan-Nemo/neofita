@@ -1,33 +1,56 @@
 <script setup lang="ts">
-import { collection, getDocs } from 'firebase/firestore'
-import { onMounted, ref } from 'vue'
+import { useFirebase } from '@/composables/useFirebase'
+import { expandHexColor } from '@/utils/helpers'
+import { onMounted, ref, watch } from 'vue'
 
-interface Category {
-  id: string
-  name: string
-  color: string
-}
+const { categories, updateCategory, fetchCategories } = useFirebase()
+const categoryName = ref('')
+const categoryColor = ref('#000000')
+const isEditMode = ref(false)
+const selectedCategoryId = ref<string | null>(null)
+const colorPickerRef = ref(null)
 
-const firestore = useNuxtApp().$firestore
-const auth = useAuth()
-const categories = ref<Category[]>([])
+async function UpdateCategory() {
+  try {
+    if (!categoryName.value || !categoryColor.value) {
+      useToast('Please fill in all fields', 'error')
+      return
+    }
 
-async function fetchCategories() {
-  if (auth) {
-    const querySnapshot = await getDocs(collection(firestore, `users-data/${auth.userID}/finance-category`))
-    categories.value = querySnapshot.docs.map((doc) => {
-      const data = doc.data()
-      return {
-        id: doc.id,
-        name: data.name,
-        color: data.color,
-      } as Category
-    })
+    if (isEditMode.value && selectedCategoryId.value) {
+      await updateCategory(selectedCategoryId.value, categoryName.value, categoryColor.value)
+    }
+
+    clearForm()
+    useToast('Category updated successfully', 'success')
+    fetchCategories()
+  }
+  catch (error: any) {
+    useToast(error.message, 'error')
   }
 }
 
-onMounted(() => {
-  fetchCategories()
+function selectCategory(category: Category) {
+  categoryName.value = category.name
+  categoryColor.value = expandHexColor(category.color)
+  selectedCategoryId.value = category.id
+  isEditMode.value = true
+}
+
+function clearForm() {
+  categoryName.value = ''
+  categoryColor.value = '#000000'
+  selectedCategoryId.value = null
+  isEditMode.value = false
+}
+
+onMounted(fetchCategories)
+
+watch(categoryColor, (newColor) => {
+  categoryColor.value = expandHexColor(newColor)
+  if (colorPickerRef.value) {
+    colorPickerRef.value = categoryColor.value as any
+  }
 })
 </script>
 
@@ -42,19 +65,48 @@ onMounted(() => {
       </div>
     </div>
     <div v-for="category in categories" :key="category.id" class="row">
-      <div class="column flex gap-4">
+      <div class="column flex gap-4 items-center">
         <span class="w-6 h-6 text-xs flex justify-center items-center p-2 rounded-full text-white" :style="{ backgroundColor: category.color }">
           {{ category.name.trim().charAt(0).toUpperCase() }}
         </span>
-        <div>
+        <div v-if="isEditMode && selectedCategoryId === category.id">
+          <input
+            v-model="categoryName"
+            placeholder="Enter category name"
+            class="w-full p-2 text-gray-200 outline-none placeholder-gray-200 border border-gray-100 bg-transparent rounded-lg"
+          >
+          <input ref="colorPickerRef" v-model="categoryColor" type="color" class="w-8 h-8 p-0 border-none bg-transparent ml-2">
+        </div>
+        <div v-else>
           {{ category.name }}
         </div>
       </div>
       <div class="column flex gap-4 items-center justify-end">
-        <span class="p-2 border flex items-center hover:text-red cursor-pointer transition-all border-gray-100 rounded-lg">
+        <span
+          v-if="!isEditMode"
+          class="p-2 border flex items-center hover:text-red cursor-pointer transition-all border-gray-100 rounded-lg"
+          @click="selectCategory(category)"
+        >
           <Icon size="20" name="ion:edit" />
         </span>
-        <span class="p-2 border flex items-center hover:text-red cursor-pointer transition-all border-gray-100 rounded-lg">
+        <span
+          v-if="isEditMode"
+          class="p-2 border flex items-center hover:text-red cursor-pointer transition-all border-gray-100 rounded-lg"
+          @click="isEditMode = false"
+        >
+          <Icon size="20" name="ion:close" />
+        </span>
+        <span
+          v-if="isEditMode && selectedCategoryId === category.id"
+          class="p-2 border flex items-center hover:text-red cursor-pointer transition-all border-gray-100 rounded-lg"
+          @click="UpdateCategory"
+        >
+          <Icon size="20" name="ion:save-outline" />
+        </span>
+        <span
+          v-if="!isEditMode"
+          class="p-2 border flex items-center hover:text-red cursor-pointer transition-all border-gray-100 rounded-lg"
+        >
           <Icon size="20" name="ion:trash-outline" />
         </span>
       </div>
