@@ -1,8 +1,4 @@
 <script setup lang="ts">
-import { useFirebase } from '@/composables/useFirebase'
-import { expandHexColor } from '@/utils/helpers'
-import { onMounted, ref, watch } from 'vue'
-
 const { categories, updateCategory, fetchCategories, deleteCategory } = useFirebase()
 const categoryName = ref('')
 const categoryColor = ref('#000000')

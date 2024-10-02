@@ -23,7 +23,7 @@ definePageMeta({
       <div class="flex-row flex gap-6 py-6">
         <div class="w-2/3">
           <Tile class="w-[904px]" title="Transactions" button-text="Add transaction">
-            <TransactionList />
+            <TransactionListEdit />
           </Tile>
         </div>
         <div class="w-1/3">

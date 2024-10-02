@@ -1,0 +1,171 @@
+<script setup lang="ts">
+const { transactions, categories, fetchTransactions, fetchCategories, updateTransaction, deleteTransaction } = useFirebase()
+
+const amount = ref<number | null>(null)
+const date = ref<string>('')
+const categoryId = ref<string>('')
+
+const isEditMode = ref(false)
+const selectedTransactionId = ref<string | null>(null)
+
+async function UpdateTransaction() {
+  try {
+    if (!amount.value || !date.value || !categoryId.value) {
+      useToast('Please fill in all fields', 'error')
+      return
+    }
+
+    if (isEditMode.value && selectedTransactionId.value) {
+      await updateTransaction(selectedTransactionId.value, { amount: amount.value, date: date.value, categoryId: categoryId.value })
+    }
+
+    clearForm()
+    useToast('Transaction updated successfully', 'success')
+    fetchTransactions()
+  }
+  catch (error: any) {
+    useToast(error.message, 'error')
+  }
+}
+
+async function confirmDeleteTransaction(transactionId: string) {
+  try {
+    // TODO: WRITE A CONFIRMATION MODAL
+    await deleteTransaction(transactionId)
+    useToast('Transaction deleted successfully', 'success')
+    fetchTransactions()
+  }
+  catch (error: any) {
+    useToast(error.message, 'error')
+  }
+}
+
+function selectTransaction(transaction: Transaction) {
+  console.log(transaction)
+  amount.value = transaction.amount
+  date.value = formatDate(transaction.date)
+  categoryId.value = transaction.category.id
+  selectedTransactionId.value = transaction.id
+  isEditMode.value = true
+}
+
+function clearForm() {
+  amount.value = null
+  date.value = ''
+  categoryId.value = ''
+  selectedTransactionId.value = null
+  isEditMode.value = false
+}
+
+onMounted(async () => {
+  await fetchCategories()
+  await fetchTransactions()
+})
+</script>
+
+<template>
+  <div class="transactions">
+    <div class="header">
+      <div class="column">
+        Category
+      </div>
+      <div class="column">
+        Date
+      </div>
+      <div class="column">
+        Amount
+      </div>
+      <div class="column justify-end">
+        Actions
+      </div>
+    </div>
+    <div v-for="t in transactions" :key="t.id" class="row">
+      <div class="column flex gap-4">
+        <div v-if="isEditMode && selectedTransactionId === t.id" class="flex items-center w-full gap-[65px]">
+          <select v-model="categoryId" class="w-full min-w-[150px] p-2 text-gray-200 outline-none placeholder-gray-200 border border-gray-100 bg-transparent rounded-lg">
+            <option v-for="category in categories" :key="category.id" :value="category.id">
+              {{ category.name }}
+            </option>
+          </select>
+          <input
+            v-model="date"
+            type="date"
+            class="w-full min-w-[150px] p-2 text-gray-200 outline-none placeholder-gray-200 border border-gray-100 bg-transparent rounded-lg"
+          >
+          <input
+            v-model="amount"
+            placeholder="Enter amount"
+            class="w-full min-w-[150px] p-2 text-gray-200 outline-none placeholder-gray-200 border border-gray-100 bg-transparent rounded-lg"
+          >
+        </div>
+        <div v-else class="flex gap-4 items-center">
+          <span class="w-6 h-6 text-xs flex justify-center items-center p-2 rounded-full text-white" :style="{ backgroundColor: t.category.color }">
+            {{ t.category.name.trim().charAt(0).toUpperCase() }}
+          </span>
+          {{ t.category.name }}
+        </div>
+      </div>
+      <div class="column">
+        <span v-if="!isEditMode || selectedTransactionId !== t.id">{{ formatDate(t.date) }}</span>
+      </div>
+      <div class="column">
+        <span v-if="!isEditMode || selectedTransactionId !== t.id">{{ t.amount }}</span>
+      </div>
+      <div class="column flex gap-4 items-center justify-end">
+        <span
+          v-if="isEditMode && selectedTransactionId === t.id"
+          class="p-2 border flex items-center cursor-pointer transition-all border-gray-100 rounded-lg"
+          @click="clearForm"
+        >
+          <Icon size="20" name="ion:close" />
+        </span>
+        <span
+          v-if="isEditMode && selectedTransactionId === t.id"
+          class="p-2 border flex items-center cursor-pointer transition-all border-gray-100 rounded-lg"
+          @click="UpdateTransaction"
+        >
+          <Icon size="20" name="ion:save-outline" />
+        </span>
+        <span
+          v-if="!isEditMode || selectedTransactionId !== t.id"
+          :class="{ disabled: isEditMode && selectedTransactionId !== t.id }"
+          class="p-2 border flex items-center cursor-pointer transition-all border-gray-100 rounded-lg"
+          @click="selectTransaction(t)"
+        >
+          <Icon size="20" name="ion:edit" />
+        </span>
+        <span
+          v-if="!isEditMode || selectedTransactionId !== t.id"
+          :class="{ disabled: isEditMode && selectedTransactionId !== t.id }"
+          class="p-2 border flex items-center cursor-pointer transition-all border-gray-100 rounded-lg"
+          @click="confirmDeleteTransaction(t.id)"
+        >
+          <Icon size="20" name="ion:trash-outline" />
+        </span>
+      </div>
+    </div>
+  </div>
+</template>
+
+<style lang="scss" scoped>
+.transactions {
+  @apply flex flex-col w-full;
+}
+
+.header, .row {
+  @apply flex border-t border-gray-300;
+}
+
+.column {
+  @apply flex flex-1 p-4 text-sm text-gray-200 items-center;
+}
+
+.header .column {
+  @apply text-white;
+}
+
+.disabled {
+  pointer-events: none;
+  opacity: 0.5;
+}
+</style>

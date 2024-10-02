@@ -8,3 +8,11 @@ export interface Category {
   name: string
   color: string
 }
+
+export interface Transaction {
+  id: string
+  date: Timestamp
+  amount: number
+  color: string
+  category: Category
+}

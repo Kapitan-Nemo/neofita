@@ -4,3 +4,8 @@ export function expandHexColor(hex: string): string {
   }
   return hex
 }
+
+export function formatDate(timestamp: Timestamp): string {
+  const date = new Date(timestamp.seconds * 1000)
+  return `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`
+}

@@ -52,7 +52,7 @@ onMounted(() => {
       <Dropdown>
         <template #trigger>
           <div class="flex items-center gap-6 hover:text-red cursor-pointer transition-all">
-            <img class="w-8 h-8 rounded-full" :src="photo" alt="user photo">
+            <img class="w-8 h-8 rounded-full" referrerPolicy="no-referrer" :src="photo" alt="user photo">
             <span>{{ auth.userName }}</span>
             <Icon size="30" name="ion:ios-bell-outline" />
           </div>

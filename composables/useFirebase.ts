@@ -1,10 +1,11 @@
-import { addDoc, collection, deleteDoc, doc, getDocs, updateDoc } from 'firebase/firestore'
+import { addDoc, collection, deleteDoc, doc, getDoc, getDocs, updateDoc } from 'firebase/firestore'
 
 export function useFirebase() {
   const firestore = useNuxtApp().$firestore
   const auth = useAuth()
 
   const categories = ref<Category[]>([])
+  const transactions = ref<Transaction[]>([])
 
   async function createCategory(name: string, color: string) {
     if (!auth)
@@ -37,5 +38,40 @@ export function useFirebase() {
     await deleteDoc(categoryRef)
   }
 
-  return { categories, createCategory, updateCategory, deleteCategory, fetchCategories }
+  async function createTransaction(amount: number, date: Date, categoryId: string) {
+    if (!auth)
+      throw new Error('User not authenticated')
+    const categoryRef = doc(firestore, `users-data/${auth.userID}/finance-category`, categoryId)
+    const newTransactionRef = await addDoc(collection(firestore, `users-data/${auth.userID}/finance-transactions`), { amount, date, category: categoryRef })
+    return newTransactionRef.id
+  }
+
+  async function fetchTransactions() {
+    if (!auth)
+      throw new Error('User not authenticated')
+    const querySnapshot = await getDocs(collection(firestore, `users-data/${auth.userID}/finance-transactions`))
+    transactions.value = await Promise.all(querySnapshot.docs.map(async (doc) => {
+      const data = doc.data()
+      const categoryDoc = await getDoc(data.category)
+      const categoryData = categoryDoc.data()
+      return { id: doc.id, amount: data.amount, date: data.date, category: { id: categoryDoc.id, ...categoryData } } as Transaction
+    }))
+  }
+
+  async function deleteTransaction(id: string) {
+    if (!auth)
+      throw new Error('User not authenticated')
+    const transactionRef = doc(firestore, `users-data/${auth.userID}/finance-transactions`, id)
+    await deleteDoc(transactionRef)
+  }
+
+  async function updateTransaction(id: string, amount: number, date: Date, categoryId: string) {
+    if (!auth)
+      throw new Error('User not authenticated')
+    const categoryRef = doc(firestore, `users-data/${auth.userID}/finance-category`, categoryId)
+    const transactionRef = doc(firestore, `users-data/${auth.userID}/finance-transactions`, id)
+    await updateDoc(transactionRef, { amount, date, category: categoryRef })
+  }
+
+  return { categories, transactions, createCategory, updateCategory, deleteCategory, fetchCategories, createTransaction, fetchTransactions, deleteTransaction, updateTransaction }
 }
