@@ -16,7 +16,7 @@ async function UpdateTransaction() {
     }
 
     if (isEditMode.value && selectedTransactionId.value) {
-      await updateTransaction(selectedTransactionId.value, { amount: amount.value, date: date.value, categoryId: categoryId.value })
+      await updateTransaction(selectedTransactionId.value, amount.value, new Date(date.value), categoryId.value)
     }
 
     clearForm()
@@ -145,6 +145,9 @@ onMounted(async () => {
       </div>
     </div>
   </div>
+  <Modal>
+    <TransactionListCreate />
+  </Modal>
 </template>
 
 <style lang="scss" scoped>

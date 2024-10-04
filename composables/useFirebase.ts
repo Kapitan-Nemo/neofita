@@ -1,4 +1,4 @@
-import { addDoc, collection, deleteDoc, doc, getDoc, getDocs, updateDoc } from 'firebase/firestore'
+import { addDoc, collection, deleteDoc, doc, getDoc, getDocs, onSnapshot, updateDoc } from 'firebase/firestore'
 
 export function useFirebase() {
   const firestore = useNuxtApp().$firestore
@@ -39,6 +39,7 @@ export function useFirebase() {
   }
 
   async function createTransaction(amount: number, date: Date, categoryId: string) {
+    console.log('createTransaction', amount, date, categoryId)
     if (!auth)
       throw new Error('User not authenticated')
     const categoryRef = doc(firestore, `users-data/${auth.userID}/finance-category`, categoryId)
@@ -49,13 +50,16 @@ export function useFirebase() {
   async function fetchTransactions() {
     if (!auth)
       throw new Error('User not authenticated')
-    const querySnapshot = await getDocs(collection(firestore, `users-data/${auth.userID}/finance-transactions`))
-    transactions.value = await Promise.all(querySnapshot.docs.map(async (doc) => {
-      const data = doc.data()
-      const categoryDoc = await getDoc(data.category)
-      const categoryData = categoryDoc.data()
-      return { id: doc.id, amount: data.amount, date: data.date, category: { id: categoryDoc.id, ...categoryData } } as Transaction
-    }))
+
+    const transactionsRef = collection(firestore, `users-data/${auth.userID}/finance-transactions`)
+    onSnapshot(transactionsRef, async (querySnapshot) => {
+      transactions.value = await Promise.all(querySnapshot.docs.map(async (doc) => {
+        const data = doc.data()
+        const categoryDoc = await getDoc(data.category)
+        const categoryData = categoryDoc.data()
+        return { id: doc.id, amount: data.amount, date: data.date, category: { id: categoryDoc.id, ...categoryData } } as Transaction
+      }))
+    })
   }
 
   async function deleteTransaction(id: string) {

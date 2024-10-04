@@ -1,14 +1,19 @@
-export const useModal = defineStore('modal', {
+// stores/modal.ts
+import { defineStore } from 'pinia'
+
+export const useModalStore = defineStore('modal', {
   state: () => ({
-    show: false,
-    createAccount: false,
+    showModal: false,
+    modalContent: null as any,
   }),
   actions: {
-    toggleModal() {
-      this.show = !this.show
+    openModal(content: any) {
+      this.showModal = true
+      this.modalContent = content
+    },
+    closeModal() {
+      this.showModal = false
+      this.modalContent = null
     },
   },
 })
-
-if (import.meta.hot)
-  import.meta.hot.accept(acceptHMRUpdate(useModal, import.meta.hot))
