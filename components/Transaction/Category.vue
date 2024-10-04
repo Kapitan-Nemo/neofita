@@ -1,5 +1,7 @@
 <script setup lang="ts">
-const { categories, updateCategory, fetchCategories, deleteCategory } = useFirebase()
+const firebaseStore = useFirebaseStore()
+const categories = computed(() => firebaseStore.categories)
+
 const categoryName = ref('')
 const categoryColor = ref('#000000')
 const isEditMode = ref(false)
@@ -14,7 +16,9 @@ async function UpdateCategory() {
     }
 
     if (isEditMode.value && selectedCategoryId.value) {
-      await updateCategory(selectedCategoryId.value, categoryName.value, categoryColor.value)
+      await firebaseStore.updateCategory(selectedCategoryId.value, categoryName.value, categoryColor.value)
+      console.log('update category')
+      firebaseStore.fetchTransactions()
     }
 
     clearForm()
@@ -28,7 +32,8 @@ async function UpdateCategory() {
 async function confirmDeleteCategory(categoryId: string) {
   try {
     // TODO: WRITE A CONFIRMATION MODAL
-    await deleteCategory(categoryId)
+    // await firebaseStore.deleteCategory(categoryId)
+    await firebaseStore.deleteCategory(categoryId)
     useToast('Category deleted successfully', 'success')
   }
   catch (error: any) {
@@ -50,7 +55,9 @@ function clearForm() {
   isEditMode.value = false
 }
 
-onMounted(fetchCategories)
+onMounted(async () => {
+  await firebaseStore.fetchCategories()
+})
 
 watch(categoryColor, (newColor) => {
   categoryColor.value = expandHexColor(newColor)

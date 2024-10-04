@@ -1,5 +1,6 @@
 <script setup lang="ts">
-const { categories, fetchCategories, createTransaction } = useFirebase()
+const firebaseStore = useFirebaseStore()
+const categories = computed(() => firebaseStore.categories)
 
 const amount = ref(0)
 const date = ref(new Date().toISOString().split('T')[0])
@@ -14,7 +15,7 @@ async function createFinance() {
 
     const dateObject = new Date(date.value) // Convert string to Date object
 
-    await createTransaction(
+    await firebaseStore.createTransaction(
       amount.value,
       dateObject, // Pass the Date object
       selectedCategory.value,
@@ -28,7 +29,7 @@ async function createFinance() {
 }
 
 onMounted(() => {
-  fetchCategories()
+  firebaseStore.fetchCategories()
 })
 </script>
 

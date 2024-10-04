@@ -1,9 +1,15 @@
 <script setup lang="ts">
-const { transactions, fetchTransactions } = useFirebase()
+const firebaseStore = useFirebaseStore()
+const transactions = computed(() => firebaseStore.transactions)
 
-onMounted(async () => {
-  await fetchTransactions()
+onMounted(() => {
+  firebaseStore.fetchTransactions()
 })
+
+// Function to format date
+function formatDate(date: Date) {
+  return new Date(date).toLocaleDateString()
+}
 </script>
 
 <template>

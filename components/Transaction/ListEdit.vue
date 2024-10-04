@@ -1,5 +1,7 @@
 <script setup lang="ts">
-const { transactions, categories, fetchTransactions, fetchCategories, updateTransaction, deleteTransaction } = useFirebase()
+const firebaseStore = useFirebaseStore()
+const transactions = computed(() => firebaseStore.transactions)
+const categories = computed(() => firebaseStore.categories)
 
 const amount = ref<number | null>(null)
 const date = ref<string>('')
@@ -16,7 +18,7 @@ async function UpdateTransaction() {
     }
 
     if (isEditMode.value && selectedTransactionId.value) {
-      await updateTransaction(selectedTransactionId.value, amount.value, new Date(date.value), categoryId.value)
+      await firebaseStore.updateTransaction(selectedTransactionId.value, amount.value, new Date(date.value), categoryId.value)
     }
 
     clearForm()
@@ -30,9 +32,8 @@ async function UpdateTransaction() {
 async function confirmDeleteTransaction(transactionId: string) {
   try {
     // TODO: WRITE A CONFIRMATION MODAL
-    await deleteTransaction(transactionId)
+    await firebaseStore.deleteTransaction(transactionId)
     useToast('Transaction deleted successfully', 'success')
-    fetchTransactions()
   }
   catch (error: any) {
     useToast(error.message, 'error')
@@ -40,7 +41,6 @@ async function confirmDeleteTransaction(transactionId: string) {
 }
 
 function selectTransaction(transaction: Transaction) {
-  console.log(transaction)
   amount.value = transaction.amount
   date.value = formatDate(transaction.date)
   categoryId.value = transaction.category.id
@@ -57,8 +57,8 @@ function clearForm() {
 }
 
 onMounted(async () => {
-  await fetchCategories()
-  await fetchTransactions()
+  await firebaseStore.fetchTransactions()
+  await firebaseStore.fetchCategories()
 })
 </script>
 
