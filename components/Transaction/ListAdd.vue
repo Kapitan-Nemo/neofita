@@ -13,11 +13,11 @@ async function createFinance() {
       return
     }
 
-    const dateObject = new Date(date.value) // Convert string to Date object
+    const dateObject = new Date(date.value)
 
     await firebaseStore.createTransaction(
       amount.value,
-      dateObject, // Pass the Date object
+      dateObject,
       selectedCategory.value,
     )
 

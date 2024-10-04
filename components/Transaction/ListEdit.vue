@@ -145,7 +145,7 @@ onMounted(async () => {
     </div>
   </div>
   <Modal>
-    <TransactionListCreate />
+    <TransactionListAdd />
   </Modal>
 </template>
 
