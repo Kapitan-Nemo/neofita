@@ -93,6 +93,7 @@ onMounted(async () => {
           >
           <input
             v-model="amount"
+            type="number"
             placeholder="Enter amount"
             class="w-full min-w-[150px] p-2 text-gray-200 outline-none placeholder-gray-200 border border-gray-100 bg-transparent rounded-lg"
           >

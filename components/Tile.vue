@@ -8,7 +8,6 @@ defineProps<Partial<{
 }>>()
 const modalStore = useModalStore()
 function openCategoryModal() {
-  console.log('openModal')
   modalStore.openModal('<p>Content from LIST </p>')
 }
 </script>
@@ -26,11 +25,11 @@ function openCategoryModal() {
           </p>
         </div>
         <div class="flex gap-4">
-          <NuxtLink v-if="buttonAction && link" :to="link" class="flex items-center gap-4 px-4 py-2 text-sm border border-gray-100 text-white rounded">
+          <NuxtLink v-if="buttonAction && link" :to="link" class="flex items-center gap-4 px-4 py-2 text-sm border border-gray-100 text-white rounded-lg">
             {{ buttonAction }}<Icon name="ion:edit" />
           </NuxtLink>
 
-          <button v-if="buttonText" class="px-4 py-2 text-sm border border-gray-100 text-white rounded" @click="openCategoryModal">
+          <button v-if="buttonText" class="px-4 py-2 text-sm border border-gray-100 text-white rounded-lg" @click="openCategoryModal">
             {{ buttonText }}
           </button>
         </div>

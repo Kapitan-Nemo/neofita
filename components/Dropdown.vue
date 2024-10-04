@@ -29,7 +29,7 @@ onBeforeUnmount(() => {
     <div
       :class="{ 'opacity-100': isDropdownVisible, 'opacity-0': !isDropdownVisible }"
       :style="{ 'pointer-events': isDropdownVisible ? 'auto' : 'none' }"
-      class="w-full absolute top-full mt-8 right-0 z-50 border-gray-100 border bg-gray rounded shadow-lg transition-opacity duration-300"
+      class="w-full absolute top-full mt-8 right-0 z-50 border-gray-100 border bg-gray rounded-lg shadow-lg transition-opacity duration-300"
     >
       <ul>
         <slot name="items" />

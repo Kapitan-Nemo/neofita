@@ -12,9 +12,9 @@ function handleBackgroundClick(event: MouseEvent) {
 <template>
   <Teleport to="body">
     <div v-if="modalStore.showModal" class="transition-all fixed inset-0 flex items-center justify-center bg-gray-100 bg-opacity-50" @click="handleBackgroundClick">
-      <div class="bg-gray-300 p-6 rounded-lg relative">
+      <div class="bg-gray-300 w-[350px] p-12 rounded-lg relative">
         <button class="absolute top-2 right-2" @click="modalStore.closeModal">
-          <Icon name="ion:close" />
+          <Icon size="30" name="ion:close" />
         </button>
         <slot />
       </div>
