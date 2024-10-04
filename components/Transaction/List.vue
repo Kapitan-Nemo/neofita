@@ -21,11 +21,11 @@ onMounted(async () => {
     </div>
     <div v-for="t in transactions" :key="t.id" class="row">
       <div class="column flex gap-4">
-        <span class="w-6 h-6 text-xs flex justify-center items-center p-2 rounded-full text-white" :style="{ backgroundColor: t.category.color }">
-          {{ t.category.name.trim().charAt(0).toUpperCase() }}
+        <span class="w-6 h-6 text-xs flex justify-center items-center p-2 rounded-full text-white" :style="{ backgroundColor: t.category.color || '#000' }">
+          {{ t.category.name?.trim().charAt(0).toUpperCase() || 'U' }}
         </span>
         <div>
-          {{ t.category.name }}
+          {{ t.category.name || 'Uncategorized' }}
         </div>
       </div>
       <div class="column">

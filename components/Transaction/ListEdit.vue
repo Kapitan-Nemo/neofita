@@ -21,7 +21,6 @@ async function UpdateTransaction() {
 
     clearForm()
     useToast('Transaction updated successfully', 'success')
-    fetchTransactions()
   }
   catch (error: any) {
     useToast(error.message, 'error')
@@ -99,10 +98,10 @@ onMounted(async () => {
           >
         </div>
         <div v-else class="flex gap-4 items-center">
-          <span class="w-6 h-6 text-xs flex justify-center items-center p-2 rounded-full text-white" :style="{ backgroundColor: t.category.color }">
-            {{ t.category.name.trim().charAt(0).toUpperCase() }}
+          <span class="w-6 h-6 text-xs flex justify-center items-center p-2 rounded-full text-white" :style="{ backgroundColor: t.category.color || '#000' }">
+            {{ t.category.name?.trim().charAt(0).toUpperCase() || 'U' }}
           </span>
-          {{ t.category.name }}
+          {{ t.category.name || 'Uncategorized' }}
         </div>
       </div>
       <div class="column">

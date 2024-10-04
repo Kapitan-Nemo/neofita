@@ -19,7 +19,6 @@ async function UpdateCategory() {
 
     clearForm()
     useToast('Category updated successfully', 'success')
-    fetchCategories()
   }
   catch (error: any) {
     useToast(error.message, 'error')
@@ -31,7 +30,6 @@ async function confirmDeleteCategory(categoryId: string) {
     // TODO: WRITE A CONFIRMATION MODAL
     await deleteCategory(categoryId)
     useToast('Category deleted successfully', 'success')
-    fetchCategories()
   }
   catch (error: any) {
     useToast(error.message, 'error')

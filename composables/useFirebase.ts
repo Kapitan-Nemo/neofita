@@ -24,10 +24,13 @@ export function useFirebase() {
   async function fetchCategories() {
     if (!auth)
       throw new Error('User not authenticated')
-    const querySnapshot = await getDocs(collection(firestore, `users-data/${auth.userID}/finance-category`))
-    categories.value = querySnapshot.docs.map((doc) => {
-      const data = doc.data()
-      return { id: doc.id, name: data.name, color: data.color } as Category
+
+    const categoriesRef = collection(firestore, `users-data/${auth.userID}/finance-category`)
+    onSnapshot(categoriesRef, (querySnapshot) => {
+      categories.value = querySnapshot.docs.map((doc) => {
+        const data = doc.data()
+        return { id: doc.id, name: data.name, color: data.color } as Category
+      })
     })
   }
 
