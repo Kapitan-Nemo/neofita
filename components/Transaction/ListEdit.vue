@@ -104,11 +104,6 @@ onMounted(async () => {
             </template>
           </VDatePicker>
 
-          <!-- <input
-            v-model="date"
-            type="date"
-            class="cursor-pointer w-full min-w-[150px] p-2 text-gray-200 outline-none placeholder-gray-200 border border-gray-100 bg-transparent rounded-lg"
-          > -->
           <input
             v-model="amount"
             type="number"
@@ -160,6 +155,14 @@ onMounted(async () => {
         >
           <Icon size="20" name="ion:trash-outline" />
         </span>
+      </div>
+    </div>
+    <div>
+      <div v-if="!transactions.length" class="p-4 flex flex-row items-center">
+        <img src="/assets/img/no_found.jpg" alt="No data" class="w-40 rounded-lg">
+        <p class="text-center text-gray-200 w-full">
+          Whoops... There is no data, ask the devil to add some.
+        </p>
       </div>
     </div>
   </div>
