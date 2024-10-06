@@ -1,11 +1,12 @@
 <script setup lang="ts">
-defineProps<Partial<{
+const props = defineProps<Partial<{
   title: string
   subtitle: string
   buttonText: string
   buttonAction: string
   link: string
   active: boolean
+  modalId: string
 }>>()
 const modalStore = useModalStore()
 </script>
@@ -26,8 +27,7 @@ const modalStore = useModalStore()
           <NuxtLink v-if="buttonAction && link" :to="link" class="flex items-center gap-4 px-4 py-2 text-sm border border-gray-100 text-white rounded-lg">
             {{ buttonAction }}<Icon name="ion:edit" />
           </NuxtLink>
-
-          <button v-if="buttonText" :disabled="!active" class="px-4 py-2 text-sm border border-gray-100 text-white rounded-lg" @click="modalStore.openModal()">
+          <button v-if="buttonText" :disabled="!active" class="px-4 py-2 text-sm border border-gray-100 text-white rounded-lg" @click="modalStore.openModal(props.modalId)">
             {{ buttonText }}
           </button>
         </div>

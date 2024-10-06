@@ -33,12 +33,12 @@ definePageMeta({
       </div>
       <div class="flex-row flex gap-6 py-6">
         <div class="w-2/3">
-          <Tile :active="checkCategories" class="w-[904px]" title="Transactions" button-text="Add transaction">
+          <Tile :active="checkCategories" class="w-[904px]" title="Transactions" button-text="Add transaction" modal-id="transactionModal">
             <TransactionListEdit />
           </Tile>
         </div>
         <div class="w-1/3">
-          <Tile :active="true" title="Categories" button-text="Add category">
+          <Tile :active="true" title="Categories" button-text="Add category" modal-id="categoryModal">
             <TransactionCategory />
           </Tile>
         </div>

@@ -159,7 +159,7 @@ onMounted(async () => {
     </div>
     <TransactionListEmpty v-if="!transactions.length" />
   </div>
-  <Modal>
+  <Modal modal-id="transactionModal">
     <TransactionListAdd />
   </Modal>
 </template>

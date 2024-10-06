@@ -127,6 +127,9 @@ watch(categoryColor, (newColor) => {
       </div>
     </div>
   </div>
+  <Modal modal-id="categoryModal">
+    <TransactionCategoryAdd />
+  </Modal>
 </template>
 
 <style scoped>
