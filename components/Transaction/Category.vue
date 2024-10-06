@@ -17,7 +17,6 @@ async function UpdateCategory() {
 
     if (isEditMode.value && selectedCategoryId.value) {
       await firebaseStore.updateCategory(selectedCategoryId.value, categoryName.value, categoryColor.value)
-      console.log('update category')
       firebaseStore.fetchTransactions()
     }
 

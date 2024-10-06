@@ -1,4 +1,15 @@
 <script setup lang="ts">
+const firebaseStore = useFirebaseStore()
+
+const checkCategories = computed(() => {
+  if (firebaseStore.categories.length === 0) {
+    return false
+  }
+  else {
+    return true
+  }
+})
+
 definePageMeta({
   middleware: ['auth'],
 })
@@ -27,7 +38,7 @@ definePageMeta({
           </Tile>
         </div>
         <div class="w-1/3">
-          <Tile class="" title="Categories" button-text="Add category">
+          <Tile :active="checkCategories" title="Categories" button-text="Add category">
             <TransactionCategory />
           </Tile>
         </div>

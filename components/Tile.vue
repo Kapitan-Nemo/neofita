@@ -5,6 +5,7 @@ defineProps<Partial<{
   buttonText: string
   buttonAction: string
   link: string
+  active: boolean
 }>>()
 const modalStore = useModalStore()
 function openCategoryModal() {
@@ -29,7 +30,7 @@ function openCategoryModal() {
             {{ buttonAction }}<Icon name="ion:edit" />
           </NuxtLink>
 
-          <button v-if="buttonText" class="px-4 py-2 text-sm border border-gray-100 text-white rounded-lg" @click="openCategoryModal">
+          <button v-if="buttonText" :disabled="!active" class="px-4 py-2 text-sm border border-gray-100 text-white rounded-lg" @click="openCategoryModal">
             {{ buttonText }}
           </button>
         </div>
