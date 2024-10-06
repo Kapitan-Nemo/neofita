@@ -41,6 +41,12 @@ function formatDate(date: Date) {
         {{ t.amount }}
       </div>
     </div>
+    <div v-if="!transactions.length" class="p-4 flex flex-row items-center">
+      <img src="/assets/img/no_found.jpg" alt="No data" class="w-40 rounded-lg">
+      <p class="text-center text-gray-200 w-full">
+        Whoops... There is no data, ask the devil to add some.
+      </p>
+    </div>
   </div>
 </template>
 
