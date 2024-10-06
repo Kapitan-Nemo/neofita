@@ -1,5 +1,7 @@
 <script setup lang="ts">
 const firebaseStore = useFirebaseStore()
+const modalStore = useModalStore()
+
 const categories = computed(() => firebaseStore.categories)
 
 const amount = ref(0)
@@ -20,7 +22,7 @@ async function createFinance() {
       dateObject,
       selectedCategory.value,
     )
-
+    modalStore.closeModal()
     useToast('Transaction created successfully', 'success')
   }
   catch (error: any) {

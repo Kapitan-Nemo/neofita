@@ -86,11 +86,29 @@ onMounted(async () => {
               {{ category.name }}
             </option>
           </select>
-          <input
+
+          <VDatePicker
+            v-model="date"
+            :style="{ backgroundColor: '#1e1e1e', border: '1px solid #454545' }"
+            color="red"
+            is-dark
+          >
+            <template #default="{ togglePopover }">
+              <button
+                class="cursor-pointer flex justify-between w-full min-w-[150px] p-2 text-gray-200 outline-none placeholder-gray-200 border border-gray-100 bg-transparent rounded-lg"
+                @click="togglePopover"
+              >
+                {{ date }}
+                <Icon size="20" name="ion:calendar-sharp" />
+              </button>
+            </template>
+          </VDatePicker>
+
+          <!-- <input
             v-model="date"
             type="date"
-            class="w-full min-w-[150px] p-2 text-gray-200 outline-none placeholder-gray-200 border border-gray-100 bg-transparent rounded-lg"
-          >
+            class="cursor-pointer w-full min-w-[150px] p-2 text-gray-200 outline-none placeholder-gray-200 border border-gray-100 bg-transparent rounded-lg"
+          > -->
           <input
             v-model="amount"
             type="number"
