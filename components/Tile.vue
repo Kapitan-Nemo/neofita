@@ -8,9 +8,6 @@ defineProps<Partial<{
   active: boolean
 }>>()
 const modalStore = useModalStore()
-function openCategoryModal() {
-  modalStore.openModal('<p>Content from LIST </p>')
-}
 </script>
 
 <template>
@@ -30,7 +27,7 @@ function openCategoryModal() {
             {{ buttonAction }}<Icon name="ion:edit" />
           </NuxtLink>
 
-          <button v-if="buttonText" :disabled="!active" class="px-4 py-2 text-sm border border-gray-100 text-white rounded-lg" @click="openCategoryModal">
+          <button v-if="buttonText" :disabled="!active" class="px-4 py-2 text-sm border border-gray-100 text-white rounded-lg" @click="modalStore.openModal()">
             {{ buttonText }}
           </button>
         </div>
