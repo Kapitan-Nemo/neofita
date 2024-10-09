@@ -12,64 +12,30 @@ async function addCategory() {
     return
   }
   await firebaseStore.createCategory(name.value, color.value)
+  useToast('Category added successfully', 'success')
   name.value = ''
   color.value = '#000000'
 }
 </script>
 
 <template>
-  <div class="category-add">
-    <div class="form-group">
+  <div class="flex flex-col gap-4">
+    <div class="flex flex-col">
       <label for="category-name">Category Name</label>
-      <input id="category-name" v-model="name" type="text" class="input" placeholder="Enter category name">
+      <input id="category-name" v-model="name" type="text" class="w-full min-w-[150px] p-2 text-gray-200 outline-none placeholder-gray-200 border border-gray-100 bg-transparent rounded-lg" placeholder="Enter category name">
     </div>
-    <div class="form-group">
+    <div class="flex flex-col">
       <label for="category-color">Category Color</label>
-      <input id="category-color" v-model="color" type="color" class="input">
+      <input id="category-color" v-model="color" type="color" class="w-8 h-8 p-0 border-none bg-transparent ml-2">
     </div>
-    <button class="btn" @click="addCategory">
+    <button class="mt-4 px-4 border-gray-100 py-2 text-sm border text-white rounded-lg" @click="addCategory">
       Add Category
     </button>
   </div>
 </template>
 
 <style lang="scss" scoped>
-.category-add {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-
-  .form-group {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-
-    label {
-      font-size: 0.875rem;
-      color: #ABABAB;
-    }
-
-    .input {
-      padding: 0.5rem;
-      border: 1px solid #454545;
-      border-radius: 0.5rem;
-      background-color: #1e1e1e;
-      color: #fff;
-    }
-  }
-
-  .btn {
-    padding: 0.5rem;
-    background-color: #cd1c21;
-    color: #fff;
-    border: none;
-    border-radius: 0.5rem;
-    cursor: pointer;
-    transition: background-color 0.3s;
-
-    &:hover {
-      background-color: #a3161b;
-    }
-  }
+label {
+  @apply mb-2 text-sm;
 }
 </style>
