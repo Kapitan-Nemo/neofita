@@ -8,7 +8,7 @@ const color = ref('#000000')
 
 async function addCategory() {
   if (name.value.trim() === '') {
-    alert('Category name cannot be empty')
+    useToast('Category name cannot be empty', 'error')
     return
   }
   await firebaseStore.createCategory(name.value, color.value)
