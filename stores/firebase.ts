@@ -33,7 +33,7 @@ export const useFirebaseStore = defineStore('firebase', {
         this.categories = querySnapshot.docs.map((doc) => {
           const data = doc.data()
           return { id: doc.id, name: data.name, color: data.color } as Category
-        })
+        }).sort((a, b) => a.name.localeCompare(b.name))
       })
     },
     async deleteCategory(id: string) {
