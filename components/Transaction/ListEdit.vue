@@ -157,6 +157,7 @@ onMounted(async () => {
         </span>
       </div>
     </div>
+    <!-- <Icon v-if="firebaseStore.loading" size="120" name="ion:load-c" class="animate-spin text-red" /> -->
     <TransactionListEmpty v-if="!transactions.length" />
   </div>
   <Modal modal-id="transactionModal">

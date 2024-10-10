@@ -1,9 +1,7 @@
 <script setup lang="ts">
 const firebaseStore = useFirebaseStore()
 const modalStore = useModalStore()
-
 const categories = computed(() => firebaseStore.categories)
-
 const amount = ref(0)
 const date = ref(new Date().toISOString().split('T')[0])
 const selectedCategory = ref('')

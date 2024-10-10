@@ -28,7 +28,6 @@ export const useFirebaseStore = defineStore('firebase', {
       const auth = useAuth()
       if (!auth)
         throw new Error('User not authenticated')
-
       const categoriesRef = collection(firestore, `users-data/${auth.userID}/finance-category`)
       onSnapshot(categoriesRef, (querySnapshot) => {
         this.categories = querySnapshot.docs.map((doc) => {
@@ -66,6 +65,7 @@ export const useFirebaseStore = defineStore('firebase', {
           const data = doc.data()
           const categoryDoc = await getDoc(data.category)
           const categoryData = categoryDoc.data()
+
           return { id: doc.id, amount: data.amount, date: data.date, category: { id: categoryDoc.id, ...categoryData } } as Transaction
         }))
       })
@@ -88,4 +88,5 @@ export const useFirebaseStore = defineStore('firebase', {
       await updateDoc(transactionRef, { amount, date, category: categoryRef })
     },
   },
+  persist: true,
 })

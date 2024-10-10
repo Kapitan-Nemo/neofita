@@ -2,8 +2,8 @@
 const firebaseStore = useFirebaseStore()
 const transactions = computed(() => firebaseStore.transactions)
 
-onMounted(() => {
-  firebaseStore.fetchTransactions()
+onMounted(async () => {
+  await firebaseStore.fetchTransactions()
 })
 </script>
 
