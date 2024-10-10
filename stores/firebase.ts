@@ -1,5 +1,5 @@
 import { useNuxtApp } from '#app'
-import { addDoc, collection, deleteDoc, doc, getDoc, onSnapshot, updateDoc } from 'firebase/firestore'
+import { addDoc, collection, deleteDoc, doc, getDoc, onSnapshot, orderBy, query, updateDoc } from 'firebase/firestore'
 
 export const useFirebaseStore = defineStore('firebase', {
   state: () => ({
@@ -28,12 +28,15 @@ export const useFirebaseStore = defineStore('firebase', {
       const auth = useAuth()
       if (!auth)
         throw new Error('User not authenticated')
+
       const categoriesRef = collection(firestore, `users-data/${auth.userID}/finance-category`)
-      onSnapshot(categoriesRef, (querySnapshot) => {
+      const orderedCategoriesRef = query(categoriesRef, orderBy('name'))
+
+      onSnapshot(orderedCategoriesRef, (querySnapshot) => {
         this.categories = querySnapshot.docs.map((doc) => {
           const data = doc.data()
           return { id: doc.id, name: data.name, color: data.color } as Category
-        }).sort((a, b) => a.name.localeCompare(b.name))
+        })
       })
     },
     async deleteCategory(id: string) {
@@ -60,15 +63,23 @@ export const useFirebaseStore = defineStore('firebase', {
         throw new Error('User not authenticated')
 
       const transactionsRef = collection(firestore, `users-data/${auth.userID}/finance-transactions`)
-      onSnapshot(transactionsRef, async (querySnapshot) => {
+      const transactionsQuery = query(transactionsRef, orderBy('date', 'desc'))
+
+      onSnapshot(transactionsQuery, async (querySnapshot) => {
         this.transactions = await Promise.all(querySnapshot.docs.map(async (doc) => {
           const data = doc.data()
           const categoryDoc = await getDoc(data.category)
           const categoryData = categoryDoc.data()
 
-          return { id: doc.id, amount: data.amount, date: data.date, category: { id: categoryDoc.id, ...categoryData } } as Transaction
+          return {
+            id: doc.id,
+            amount: data.amount,
+            date: data.date,
+            category: { id: categoryDoc.id, ...categoryData },
+          } as Transaction
         }))
       })
+      console.log(this.transactions)
     },
     async deleteTransaction(id: string) {
       const firestore = useNuxtApp().$firestore

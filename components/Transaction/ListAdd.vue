@@ -3,7 +3,20 @@ const firebaseStore = useFirebaseStore()
 const modalStore = useModalStore()
 const categories = computed(() => firebaseStore.categories)
 const amount = ref(0)
-const date = ref(new Date().toISOString().split('T')[0])
+
+// Function to format date to 'yyyy-MM-ddTHH:mm:ss'
+function formatDateToLocal(date: Date): string {
+  const pad = (num: number) => num.toString().padStart(2, '0')
+  const year = date.getFullYear()
+  const month = pad(date.getMonth() + 1)
+  const day = pad(date.getDate())
+  const hours = pad(date.getHours())
+  const minutes = pad(date.getMinutes())
+  const seconds = pad(date.getSeconds())
+  return `${year}-${month}-${day}T${hours}:${minutes}:${seconds}`
+}
+
+const date = ref(formatDateToLocal(new Date())) // Format for datetime-local with seconds
 const selectedCategory = ref('')
 
 async function createFinance() {
@@ -14,6 +27,7 @@ async function createFinance() {
     }
 
     const dateObject = new Date(date.value)
+    console.log(dateObject)
 
     await firebaseStore.createTransaction(
       amount.value,
@@ -42,7 +56,7 @@ onMounted(() => {
     </div>
     <div class="flex flex-col">
       <label for="add_date" class="">Date</label>
-      <input id="add_date" v-model="date" class="w-full min-w-[150px] p-2 text-gray-200 outline-none placeholder-gray-200 border border-gray-100 bg-transparent rounded-lg" type="date">
+      <input id="add_date" v-model="date" class="w-full min-w-[150px] p-2 text-gray-200 outline-none placeholder-gray-200 border border-gray-100 bg-transparent rounded-lg" type="datetime-local">
     </div>
     <div class="flex flex-col">
       <label for="add_category" class="">Category</label>
