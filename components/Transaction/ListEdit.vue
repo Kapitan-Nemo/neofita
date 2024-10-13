@@ -4,13 +4,14 @@ const transactions = computed(() => firebaseStore.transactions)
 const categories = computed(() => firebaseStore.categories)
 
 const amount = ref<number | null>(null)
-const date = ref<string>('')
+const date = ref(new Date())
 const categoryId = ref<string>('')
 
 const isEditMode = ref(false)
 const selectedTransactionId = ref<string | null>(null)
 
 async function UpdateTransaction() {
+  console.log(date.value)
   try {
     if (!amount.value || !date.value || !categoryId.value) {
       useToast('Please fill in all fields', 'error')
@@ -42,7 +43,8 @@ async function confirmDeleteTransaction(transactionId: string) {
 
 function selectTransaction(transaction: Transaction) {
   amount.value = transaction.amount
-  date.value = formatDate(transaction.date)
+  const timestamp = formatDate(transaction.date)
+  date.value = new Date(timestamp)
   categoryId.value = transaction.category.id
   selectedTransactionId.value = transaction.id
   isEditMode.value = true
@@ -50,7 +52,7 @@ function selectTransaction(transaction: Transaction) {
 
 function clearForm() {
   amount.value = null
-  date.value = ''
+  date.value = new Date()
   categoryId.value = ''
   selectedTransactionId.value = null
   isEditMode.value = false
@@ -89,6 +91,9 @@ onMounted(async () => {
 
           <VDatePicker
             v-model="date"
+            mode="dateTime"
+            is24hr
+            :time-accuracy="3"
             :style="{ backgroundColor: '#1e1e1e', border: '1px solid #454545' }"
             color="red"
             is-dark
@@ -98,7 +103,7 @@ onMounted(async () => {
                 class="cursor-pointer flex justify-between w-full min-w-[150px] p-2 text-gray-200 outline-none placeholder-gray-200 border border-gray-100 bg-transparent rounded-lg"
                 @click="togglePopover"
               >
-                {{ date }}
+                {{ formatDate(date, 'string') }}
                 <Icon size="20" name="ion:calendar-sharp" />
               </button>
             </template>
@@ -119,7 +124,7 @@ onMounted(async () => {
         </div>
       </div>
       <div class="column">
-        <span v-if="!isEditMode || selectedTransactionId !== t.id">{{ formatDate(t.date) }}</span>
+        <span v-if="!isEditMode || selectedTransactionId !== t.id">{{ formatDate(t.date, 'string') }}</span>
       </div>
       <div class="column">
         <span v-if="!isEditMode || selectedTransactionId !== t.id">{{ t.amount }}</span>
@@ -157,7 +162,6 @@ onMounted(async () => {
         </span>
       </div>
     </div>
-    <!-- <Icon v-if="firebaseStore.loading" size="120" name="ion:load-c" class="animate-spin text-red" /> -->
     <TransactionListEmpty v-if="!transactions.length" />
   </div>
   <Modal modal-id="transactionModal">

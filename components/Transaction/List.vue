@@ -30,7 +30,7 @@ onMounted(async () => {
         </div>
       </div>
       <div class="column">
-        {{ formatDate(t.date) }}
+        {{ formatDate(t.date, 'string') }}
       </div>
       <div class="column">
         {{ t.amount }}

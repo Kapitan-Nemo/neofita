@@ -11,7 +11,7 @@ export interface Category {
 
 export interface Transaction {
   id: string
-  date: Timestamp | Date | string | number
+  date: Timestamp
   amount: number
   color: string
   category: Category
