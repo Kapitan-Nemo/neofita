@@ -96,14 +96,14 @@ watch(categoryColor, (newColor) => {
       <div class="column flex gap-4 items-center justify-end">
         <span
           v-if="isEditMode && selectedCategoryId === category.id"
-          class="p-2 border flex items-center cursor-pointer transition-all border-gray-100 rounded-lg"
+          class="hover:text-red p-2 border flex items-center cursor-pointer transition-all border-gray-100 rounded-lg"
           @click="clearForm"
         >
           <Icon size="20" name="ion:close" />
         </span>
         <span
           v-if="isEditMode && selectedCategoryId === category.id"
-          class="p-2 border flex items-center cursor-pointer transition-all border-gray-100 rounded-lg"
+          class="hover:text-red p-2 border flex items-center cursor-pointer transition-all border-gray-100 rounded-lg"
           @click="UpdateCategory"
         >
           <Icon size="20" name="ion:save-outline" />
@@ -111,7 +111,7 @@ watch(categoryColor, (newColor) => {
         <span
           v-if="!isEditMode || selectedCategoryId !== category.id"
           :class="{ disabled: isEditMode && selectedCategoryId !== category.id }"
-          class="p-2 border flex items-center cursor-pointer transition-all border-gray-100 rounded-lg"
+          class="hover:text-red p-2 border flex items-center cursor-pointer transition-all border-gray-100 rounded-lg"
           @click="selectCategory(category)"
         >
           <Icon size="20" name="ion:edit" />
@@ -119,7 +119,7 @@ watch(categoryColor, (newColor) => {
         <span
           v-if="!isEditMode || selectedCategoryId !== category.id"
           :class="{ disabled: isEditMode && selectedCategoryId !== category.id }"
-          class="p-2 border flex items-center cursor-pointer transition-all border-gray-100 rounded-lg"
+          class="hover:text-red p-2 border flex items-center cursor-pointer transition-all border-gray-100 rounded-lg"
           @click="confirmDeleteCategory(category.id)"
         >
           <Icon size="20" name="ion:trash-outline" />
