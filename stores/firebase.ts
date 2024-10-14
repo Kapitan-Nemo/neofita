@@ -1,5 +1,5 @@
 import { useNuxtApp } from '#app'
-import { addDoc, collection, deleteDoc, doc, getDoc, onSnapshot, orderBy, query, updateDoc } from 'firebase/firestore'
+import { addDoc, collection, deleteDoc, doc, getDoc, onSnapshot, orderBy, query, Timestamp, updateDoc, where } from 'firebase/firestore'
 
 export const useFirebaseStore = defineStore('firebase', {
   state: () => ({
@@ -62,8 +62,20 @@ export const useFirebaseStore = defineStore('firebase', {
       if (!auth)
         throw new Error('User not authenticated')
 
+      const currentDate = new Date()
+      const firstDayOfMonth = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1)
+      const lastDayOfMonth = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0)
+
+      const startOfMonth = Timestamp.fromDate(firstDayOfMonth)
+      const endOfMonth = Timestamp.fromDate(lastDayOfMonth)
+
       const transactionsRef = collection(firestore, `users-data/${auth.userID}/finance-transactions`)
-      const transactionsQuery = query(transactionsRef, orderBy('date', 'desc'))
+      const transactionsQuery = query(
+        transactionsRef,
+        orderBy('date', 'desc'),
+        where('date', '>=', startOfMonth),
+        where('date', '<=', endOfMonth),
+      )
 
       onSnapshot(transactionsQuery, async (querySnapshot) => {
         this.transactions = await Promise.all(querySnapshot.docs.map(async (doc) => {
@@ -79,7 +91,7 @@ export const useFirebaseStore = defineStore('firebase', {
           } as Transaction
         }))
       })
-      console.log(this.transactions)
+      console.log('transactions', this.transactions)
     },
     async deleteTransaction(id: string) {
       const firestore = useNuxtApp().$firestore
