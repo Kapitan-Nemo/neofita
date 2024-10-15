@@ -62,19 +62,16 @@ export const useFirebaseStore = defineStore('firebase', {
       if (!auth)
         throw new Error('User not authenticated')
 
-      const currentDate = new Date()
-      const firstDayOfMonth = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1)
-      const lastDayOfMonth = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0)
-
-      const startOfMonth = Timestamp.fromDate(firstDayOfMonth)
-      const endOfMonth = Timestamp.fromDate(lastDayOfMonth)
+      const dateStore = useDateStore()
+      const startDate = Timestamp.fromDate(dateStore.selectedDates.start)
+      const endDate = Timestamp.fromDate(dateStore.selectedDates.end)
 
       const transactionsRef = collection(firestore, `users-data/${auth.userID}/finance-transactions`)
       const transactionsQuery = query(
         transactionsRef,
         orderBy('date', 'desc'),
-        where('date', '>=', startOfMonth),
-        where('date', '<=', endOfMonth),
+        where('date', '>=', startDate),
+        where('date', '<=', endDate),
       )
 
       onSnapshot(transactionsQuery, async (querySnapshot) => {
