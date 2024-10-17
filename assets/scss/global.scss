@@ -1,3 +1,7 @@
+@use 'headings';
+@use 'toast';
+@use 'typography';
+
 @font-face {
     font-family: 'Montserrat';
     src: url('@/assets/fonts/Montserrat-Regular.eot');
@@ -24,9 +28,6 @@
     font-display: swap;
 }
 
-@import '_headings';
-@import '_toast';
-@import '_typography';
 
 
 /* Chrome, Safari, Edge, Opera */
