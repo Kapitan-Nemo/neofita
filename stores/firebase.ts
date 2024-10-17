@@ -5,6 +5,7 @@ export const useFirebaseStore = defineStore('firebase', {
   state: () => ({
     categories: [] as Category[],
     transactions: [] as Transaction[],
+    previousTransactions: [] as Transaction[],
   }),
   actions: {
     async createCategory(name: string, color: string) {
@@ -63,8 +64,18 @@ export const useFirebaseStore = defineStore('firebase', {
         throw new Error('User not authenticated')
 
       const dateStore = useDateStore()
+
+      const startDateObj = new Date(dateStore.selectedDates.start)
+      startDateObj.setMonth(startDateObj.getMonth() - 1)
+
+      const endDateObj = new Date(dateStore.selectedDates.end)
+      endDateObj.setMonth(endDateObj.getMonth() - 1)
+
       const startDate = Timestamp.fromDate(dateStore.selectedDates.start)
       const endDate = Timestamp.fromDate(dateStore.selectedDates.end)
+
+      const startPreviousDate = Timestamp.fromDate(startDateObj)
+      const endPreviousDate = Timestamp.fromDate(endDateObj)
 
       const transactionsRef = collection(firestore, `users-data/${auth.userID}/finance-transactions`)
       const transactionsQuery = query(
@@ -72,6 +83,13 @@ export const useFirebaseStore = defineStore('firebase', {
         orderBy('date', 'desc'),
         where('date', '>=', startDate),
         where('date', '<=', endDate),
+      )
+
+      const previousTransactionsQuery = query(
+        transactionsRef,
+        orderBy('date', 'desc'),
+        where('date', '>=', startPreviousDate),
+        where('date', '<=', endPreviousDate),
       )
 
       onSnapshot(transactionsQuery, async (querySnapshot) => {
@@ -88,7 +106,21 @@ export const useFirebaseStore = defineStore('firebase', {
           } as Transaction
         }))
       })
-      console.log('transactions', this.transactions)
+
+      onSnapshot(previousTransactionsQuery, async (querySnapshot) => {
+        this.previousTransactions = await Promise.all(querySnapshot.docs.map(async (doc) => {
+          const data = doc.data()
+          const categoryDoc = await getDoc(data.category)
+          const categoryData = categoryDoc.data()
+
+          return {
+            id: doc.id,
+            amount: data.amount,
+            date: data.date,
+            category: { id: categoryDoc.id, ...categoryData },
+          } as Transaction
+        }))
+      })
     },
     async deleteTransaction(id: string) {
       const firestore = useNuxtApp().$firestore

@@ -27,7 +27,6 @@ async function createFinance() {
     }
 
     const dateObject = new Date(date.value)
-    console.log(dateObject)
 
     await firebaseStore.createTransaction(
       amount.value,

@@ -13,15 +13,16 @@ const labels = computed(() => {
   const start = new Date(dateStore.selectedDates.start)
   const end = new Date(dateStore.selectedDates.end)
   const labelsArray = []
+  // eslint-disable-next-line no-unmodified-loop-condition
   for (let d = start; d <= end; d.setDate(d.getDate() + 1)) {
     labelsArray.push(`${d.getDate()}.${d.getMonth() + 1}.${d.getFullYear()}`)
   }
   return labelsArray
 })
 
-// Aggregate transaction amounts by date
+//  Aggregate transaction amounts by date
 const aggregatedData = computed(() => {
-  const data = Array.from({ length: labels.value.length }).fill(0)
+  const data = Array.from({ length: labels.value.length }).fill(0) as number[]
   transactions.value.forEach((transaction) => {
     const date = new Date(transaction.date.seconds * 1000)
     const index = labels.value.indexOf(`${date.getDate()}.${date.getMonth() + 1}.${date.getFullYear()}`)

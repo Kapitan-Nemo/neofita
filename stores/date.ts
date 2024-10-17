@@ -28,52 +28,7 @@ export const useDateStore = defineStore('dateStore', () => {
     end,
   })
 
-  function formatDate(date: Date): string {
-    const day = String(date.getDate()).padStart(2, '0')
-    const monthNames = [
-      'Styczeń',
-      'Luty',
-      'Marzec',
-      'Kwiecień',
-      'Maj',
-      'Czerwiec',
-      'Lipiec',
-      'Sierpień',
-      'Wrzesień',
-      'Październik',
-      'Listopad',
-      'Grudzień',
-    ]
-    const month = monthNames[date.getMonth()]
-    const year = date.getFullYear()
-    return `${day} ${month}, ${year}`
-  }
-
-  function formatDateRange(start: Date, end: Date): string {
-    const startDay = start.getDate()
-    const endDay = end.getDate()
-    const monthNames = [
-      'Styczeń',
-      'Luty',
-      'Marzec',
-      'Kwiecień',
-      'Maj',
-      'Czerwiec',
-      'Lipiec',
-      'Sierpień',
-      'Wrzesień',
-      'Październik',
-      'Listopad',
-      'Grudzień',
-    ]
-    const month = monthNames[start.getMonth()]
-    const year = start.getFullYear()
-    return `${startDay}-${endDay} ${month}, ${year}`
-  }
-
   return {
     selectedDates,
-    formatDate,
-    formatDateRange,
   }
 })

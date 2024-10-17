@@ -19,7 +19,7 @@ const dateStore = useDateStore()
           class="text-gray-200 text-sm py-2 px-6 cursor-pointer gap-4 flex hover:text-red transition-all"
           @click="togglePopover"
         >
-          {{ dateStore.formatDate(dateStore.selectedDates.start) }} - {{ dateStore.formatDate(dateStore.selectedDates.end) }}
+          {{ dateStore.selectedDates.start.toLocaleDateString() }} - {{ dateStore.selectedDates.end.toLocaleDateString() }}
           <Icon size="20" name="ion:calendar-sharp" />
         </button>
       </template>

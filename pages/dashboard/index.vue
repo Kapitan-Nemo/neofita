@@ -23,19 +23,19 @@ definePageMeta({
 
       <div class="flex py-6 gap-6">
         <div class="w-1/3">
-          <Tile title="Revenue" :subtitle="`Data from ${dateStore.formatDateRange(dateStore.selectedDates.start, dateStore.selectedDates.end)}`" button-text="View Report">
+          <Tile title="Revenue" :subtitle="`Data from ${dateStore.selectedDates.start.toLocaleDateString()} - ${dateStore.selectedDates.end.toLocaleDateString()}`" button-text="View Report">
             <ChartLine />
           </Tile>
         </div>
 
         <div class="w-1/3">
-          <Tile title="Daily Expenses" :subtitle="`Data from ${dateStore.formatDateRange(dateStore.selectedDates.start, dateStore.selectedDates.end)}`" button-text="View Report">
+          <Tile title="Daily Expenses" :subtitle="`Data from ${dateStore.selectedDates.start.toLocaleDateString()} - ${dateStore.selectedDates.end.toLocaleDateString()}`" button-text="View Report">
             <ChartBar />
           </Tile>
         </div>
 
         <div class="w-1/3">
-          <Tile title="Summary" :subtitle="`Data from ${dateStore.formatDateRange(dateStore.selectedDates.start, dateStore.selectedDates.end)}`" button-text="View Report">
+          <Tile title="Summary" :subtitle="`Data from ${dateStore.selectedDates.start.toLocaleDateString()} - ${dateStore.selectedDates.end.toLocaleDateString()}`" button-text="View Report">
             <ChartDoughnut />
           </Tile>
         </div>
@@ -43,7 +43,7 @@ definePageMeta({
     </div>
     <div class="flex pb-6 gap-6">
       <div class="w-2/3">
-        <Tile class="w-[904px]" title="Daily Transactions" link="/dashboard/manage" :subtitle="`Data from ${dateStore.formatDateRange(dateStore.selectedDates.start, dateStore.selectedDates.end)}`" button-action="Edit" button-text="View Report">
+        <Tile class="w-[904px]" title="Daily Transactions" link="/dashboard/manage" :subtitle="`Data from ${dateStore.selectedDates.start.toLocaleDateString()} - ${dateStore.selectedDates.end.toLocaleDateString()}`" button-action="Edit" button-text="View Report">
           <TransactionList />
         </Tile>
       </div>

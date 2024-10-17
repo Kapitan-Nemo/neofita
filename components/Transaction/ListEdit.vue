@@ -11,7 +11,6 @@ const isEditMode = ref(false)
 const selectedTransactionId = ref<string | null>(null)
 
 async function UpdateTransaction() {
-  console.log(date.value)
   try {
     if (!amount.value || !date.value || !categoryId.value) {
       useToast('Please fill in all fields', 'error')
