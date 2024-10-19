@@ -65,62 +65,67 @@ export const useFirebaseStore = defineStore('firebase', {
 
       const dateStore = useDateStore()
 
-      const startDateObj = new Date(dateStore.selectedDates.start)
-      startDateObj.setMonth(startDateObj.getMonth() - 1)
+      const fetchAndSetTransactions = async () => {
+        const startDateObj = new Date(dateStore.selectedDates.start)
+        startDateObj.setMonth(startDateObj.getMonth() - 1)
 
-      const endDateObj = new Date(dateStore.selectedDates.end)
-      endDateObj.setMonth(endDateObj.getMonth() - 1)
+        const endDateObj = new Date(dateStore.selectedDates.end)
+        endDateObj.setMonth(endDateObj.getMonth() - 1)
 
-      const startDate = Timestamp.fromDate(dateStore.selectedDates.start)
-      const endDate = Timestamp.fromDate(dateStore.selectedDates.end)
+        const startDate = Timestamp.fromDate(dateStore.selectedDates.start)
+        const endDate = Timestamp.fromDate(dateStore.selectedDates.end)
 
-      const startPreviousDate = Timestamp.fromDate(startDateObj)
-      const endPreviousDate = Timestamp.fromDate(endDateObj)
+        const startPreviousDate = Timestamp.fromDate(startDateObj)
+        const endPreviousDate = Timestamp.fromDate(endDateObj)
 
-      const transactionsRef = collection(firestore, `users-data/${auth.userID}/finance-transactions`)
-      const transactionsQuery = query(
-        transactionsRef,
-        orderBy('date', 'desc'),
-        where('date', '>=', startDate),
-        where('date', '<=', endDate),
-      )
+        const transactionsRef = collection(firestore, `users-data/${auth.userID}/finance-transactions`)
+        const transactionsQuery = query(
+          transactionsRef,
+          orderBy('date', 'desc'),
+          where('date', '>=', startDate),
+          where('date', '<=', endDate),
+        )
 
-      const previousTransactionsQuery = query(
-        transactionsRef,
-        orderBy('date', 'desc'),
-        where('date', '>=', startPreviousDate),
-        where('date', '<=', endPreviousDate),
-      )
+        const previousTransactionsQuery = query(
+          transactionsRef,
+          orderBy('date', 'desc'),
+          where('date', '>=', startPreviousDate),
+          where('date', '<=', endPreviousDate),
+        )
 
-      onSnapshot(transactionsQuery, async (querySnapshot) => {
-        this.transactions = await Promise.all(querySnapshot.docs.map(async (doc) => {
-          const data = doc.data()
-          const categoryDoc = await getDoc(data.category)
-          const categoryData = categoryDoc.data()
+        onSnapshot(transactionsQuery, async (querySnapshot) => {
+          this.transactions = await Promise.all(querySnapshot.docs.map(async (doc) => {
+            const data = doc.data()
+            const categoryDoc = await getDoc(data.category)
+            const categoryData = categoryDoc.data()
 
-          return {
-            id: doc.id,
-            amount: data.amount,
-            date: data.date,
-            category: { id: categoryDoc.id, ...categoryData },
-          } as Transaction
-        }))
-      })
+            return {
+              id: doc.id,
+              amount: data.amount,
+              date: data.date,
+              category: { id: categoryDoc.id, ...categoryData },
+            } as Transaction
+          }))
+        })
 
-      onSnapshot(previousTransactionsQuery, async (querySnapshot) => {
-        this.previousTransactions = await Promise.all(querySnapshot.docs.map(async (doc) => {
-          const data = doc.data()
-          const categoryDoc = await getDoc(data.category)
-          const categoryData = categoryDoc.data()
+        onSnapshot(previousTransactionsQuery, async (querySnapshot) => {
+          this.previousTransactions = await Promise.all(querySnapshot.docs.map(async (doc) => {
+            const data = doc.data()
+            const categoryDoc = await getDoc(data.category)
+            const categoryData = categoryDoc.data()
 
-          return {
-            id: doc.id,
-            amount: data.amount,
-            date: data.date,
-            category: { id: categoryDoc.id, ...categoryData },
-          } as Transaction
-        }))
-      })
+            return {
+              id: doc.id,
+              amount: data.amount,
+              date: data.date,
+              category: { id: categoryDoc.id, ...categoryData },
+            } as Transaction
+          }))
+        })
+      }
+
+      // Watch for changes in selectedDates and refetch transactions
+      watch(() => dateStore.selectedDates, fetchAndSetTransactions, { immediate: true })
     },
     async deleteTransaction(id: string) {
       const firestore = useNuxtApp().$firestore
