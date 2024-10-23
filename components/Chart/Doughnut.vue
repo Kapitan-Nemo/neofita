@@ -8,8 +8,10 @@ const firebaseStore = useFirebaseStore()
 const transactions = computed(() => firebaseStore.transactions)
 const categories = computed(() => firebaseStore.categories)
 
-console.log(transactions.value)
-console.log(categories.value)
+onMounted(() => {
+  firebaseStore.fetchTransactions()
+  firebaseStore.fetchCategories()
+})
 
 const totalAmount = computed(() => {
   return transactions.value.reduce((acc, transaction) => acc + transaction.amount, 0)
@@ -76,6 +78,41 @@ const chartData = computed(() => {
   }
 })
 
+const precentageUsedCategories = computed(() => {
+  const totalAmount = transactions.value.reduce((acc, transaction) => acc + transaction.amount, 0)
+
+  const categoryTotals: { [key: string]: number } = transactions.value.reduce((acc, transaction) => {
+    const categoryName = transaction.category.name
+    acc[categoryName] = (acc[categoryName] || 0) + transaction.amount
+    return acc
+  }, {} as { [key: string]: number })
+
+  const categoryPercentages = Object.keys(categoryTotals).reduce((acc, categoryName) => {
+    acc[categoryName] = ((categoryTotals[categoryName] / totalAmount) * 100).toFixed(2)
+    return acc
+  }, {} as { [key: string]: string })
+
+  return categoryPercentages
+})
+
+function getCurrentPercentage(category: Category) {
+  return precentageUsedCategories.value[category.name]
+}
+
+const usedCategories = computed(() => {
+  const uniqueCategoriesMap = new Map()
+
+  transactions.value.forEach((transaction) => {
+    const category = transaction.category
+    const key = `${category.id}-${category.color}-${category.name}`
+    if (!uniqueCategoriesMap.has(key)) {
+      uniqueCategoriesMap.set(key, category)
+    }
+  })
+
+  return Array.from(uniqueCategoriesMap.values())
+})
+
 const chartOptions = ref({
   responsive: true,
   plugins: {
@@ -89,7 +126,7 @@ const chartOptions = ref({
 </script>
 
 <template>
-  <div class="chart-container flex gap-6">
+  <div v-if="transactions.length" class="chart-container flex gap-6">
     <div class="w-1/2">
       <Doughnut
         id="summary-chart"
@@ -99,14 +136,15 @@ const chartOptions = ref({
     </div>
     <div class="w-1/2">
       <div class="flex flex-col">
-        <div v-for="(category, index) in categories" :key="category.id" class="flex items-center gap-4 pt-4 pb-4" :class="[{ 'border-b border-dotted border-gray-100': index !== categories.length - 1 }]">
+        <div v-for="(category, index) in usedCategories" :key="category.id" class="flex items-center gap-4 pt-4 pb-4" :class="[{ 'border-b border-dotted border-gray-100': index !== usedCategories.length - 1 }]">
           <div :style="{ backgroundColor: category.color }" class="w-2 h-2 rounded-full" />
           <div class="flex justify-between w-full items-center">
             <span class="text-sm flex">{{ category.name }}</span>
-            <!-- <span class="text-xs flex text-gray-200">{{ category }} %</span> -->
+            <span class="text-xs flex text-gray-200">{{ getCurrentPercentage(category) }} %</span>
           </div>
         </div>
       </div>
     </div>
   </div>
+  <TransactionCategoryEmpty v-else />
 </template>
