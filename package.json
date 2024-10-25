@@ -13,16 +13,16 @@
   },
   "dependencies": {
     "@nuxt/eslint": "^0.6.0",
-    "@nuxt/icon": "^1.5.6",
+    "@nuxt/icon": "^1.5.7",
     "@nuxtjs/tailwindcss": "^6.12.2",
     "@pinia/nuxt": "^0.5.5",
     "@samk-dev/nuxt-vcalendar": "^1.0.4",
     "chart.js": "^4.4.5",
-    "firebase": "^10.14.1",
-    "firebase-admin": "^12.6.0",
+    "firebase": "^11.0.1",
+    "firebase-admin": "^12.7.0",
     "nuxt": "^3.13.2",
     "pinia": "^2.2.4",
-    "pinia-plugin-persistedstate": "^4.1.1",
+    "pinia-plugin-persistedstate": "^4.1.2",
     "vue": "latest",
     "vue-chartjs": "^5.3.1",
     "vue-router": "latest"
@@ -32,7 +32,7 @@
     "@iconify-json/ion": "^1.2.1",
     "@tailwindcss/typography": "^0.5.15",
     "eslint": "^9.13.0",
-    "sass": "^1.80.3",
+    "sass": "^1.80.4",
     "typescript": "^5.6.3"
   },
   "overrides": {
