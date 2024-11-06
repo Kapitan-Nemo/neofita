@@ -64,7 +64,7 @@ onMounted(async () => {
 </script>
 
 <template>
-  <div class="transactions">
+  <div class="flex flex-col w-full">
     <div class="header">
       <div class="column">
         Category
@@ -169,10 +169,6 @@ onMounted(async () => {
 </template>
 
 <style lang="scss" scoped>
-.transactions {
-  @apply flex flex-col w-full;
-}
-
 .header, .row {
   @apply flex border-t border-gray-300;
 }

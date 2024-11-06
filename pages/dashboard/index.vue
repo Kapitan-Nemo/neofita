@@ -35,7 +35,7 @@ definePageMeta({
         </div>
 
         <div class="w-1/3">
-          <Tile title="Summary" :subtitle="`Data from ${dateStore.selectedDates.start.toLocaleDateString()} - ${dateStore.selectedDates.end.toLocaleDateString()}`" button-text="View Report">
+          <Tile class="h-full" title="Summary" :subtitle="`Data from ${dateStore.selectedDates.start.toLocaleDateString()} - ${dateStore.selectedDates.end.toLocaleDateString()}`" button-text="View Report">
             <ChartDoughnut />
           </Tile>
         </div>
@@ -43,7 +43,7 @@ definePageMeta({
     </div>
     <div class="flex pb-6 gap-6">
       <div class="w-2/3">
-        <Tile class="w-[904px]" title="Daily Transactions" link="/dashboard/manage" :subtitle="`Data from ${dateStore.selectedDates.start.toLocaleDateString()} - ${dateStore.selectedDates.end.toLocaleDateString()}`" button-action="Edit" button-text="View Report">
+        <Tile class="flex flex-col h-full w-[904px]" title="Daily Transactions" link="/dashboard/manage" :subtitle="`Data from ${dateStore.selectedDates.start.toLocaleDateString()} - ${dateStore.selectedDates.end.toLocaleDateString()}`" button-action="Manage" button-text="View Report">
           <TransactionList />
         </Tile>
       </div>
@@ -55,7 +55,7 @@ definePageMeta({
           <ChartRange />
         </Tile>
 
-        <Tile class="bg-[#191919] h-full">
+        <Tile class="bg-[#191919]">
           <ChartPlaylist />
         </Tile>
       </div>

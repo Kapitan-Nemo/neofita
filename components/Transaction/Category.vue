@@ -67,7 +67,7 @@ watch(categoryColor, (newColor) => {
 </script>
 
 <template>
-  <div class="transactions">
+  <div class="flex flex-col w-full;">
     <div class="header">
       <div class="column">
         Name
@@ -133,10 +133,6 @@ watch(categoryColor, (newColor) => {
 </template>
 
 <style scoped>
-.transactions {
-  @apply flex flex-col w-full;
-}
-
 .header, .row {
   @apply flex border-t border-gray-300;
 }
