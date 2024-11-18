@@ -77,8 +77,8 @@ onMounted(() => {
   @apply py-6 text-gray-200 hover:text-red;
 }
 .router-link-active  {
-  @apply border-red text-red border-b-2;
-  margin: 0 0 -1px 0;
+  @apply border-red text-red border-b-4;
+  margin: 0 0 -2px 0;
 }
 li {
     @apply flex items-center p-4 gap-4 text-gray-200 cursor-pointer hover:text-red;

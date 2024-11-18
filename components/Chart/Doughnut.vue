@@ -135,11 +135,11 @@ const chartOptions = ref({
       />
     </div>
     <div class="w-1/2">
-      <div class="flex flex-col">
+      <div class="flex flex-col max-h-[200px] overflow-y-auto no-scrollbar">
         <div v-for="(category, index) in usedCategories" :key="category.id" class="flex items-center gap-4 pt-4 pb-4" :class="[{ 'border-b border-dotted border-gray-100': index !== usedCategories.length - 1 }]">
           <div :style="{ backgroundColor: category.color }" class="w-2 h-2 rounded-full" />
           <div class="flex justify-between w-full items-center">
-            <span class="text-sm flex">{{ category.name }}</span>
+            <span class="text-xs flex">{{ category.name }}</span>
             <span class="text-xs flex text-gray-200">{{ getCurrentPercentage(category) }} %</span>
           </div>
         </div>

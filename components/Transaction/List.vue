@@ -8,7 +8,7 @@ onMounted(async () => {
 </script>
 
 <template>
-  <div class="flex flex-col w-full h-full">
+  <div class="flex flex-col w-full h-full max-h-[340px] overflow-y-auto no-scrollbar">
     <div v-if="transactions.length" class="header">
       <div class="column">
         Category
