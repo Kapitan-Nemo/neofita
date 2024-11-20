@@ -1,4 +1,3 @@
-import { useNuxtApp } from '#app'
 import { addDoc, collection, deleteDoc, doc, getDoc, onSnapshot, orderBy, query, Timestamp, updateDoc, where } from 'firebase/firestore'
 
 export const useFirebaseStore = defineStore('firebase', {

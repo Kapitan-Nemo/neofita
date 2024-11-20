@@ -57,7 +57,6 @@ onUnmounted(() => {
   @apply mt-6;
   overflow: hidden;
   width: 100%;
-  max-height: 60vh;
 }
 
 .slideshow {
@@ -69,7 +68,7 @@ onUnmounted(() => {
 
 .slideshow img {
   height: auto;
-  max-height: 450px;
+  max-height: 50vh;
   width: 300px; /* Adjust to your desired width */
   border-radius: 20px;
 }
