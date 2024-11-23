@@ -2,6 +2,21 @@
 const firebaseStore = useFirebaseStore()
 const financeGoal = computed(() => firebaseStore.financeGoal)
 
+function putFinanceGoal() {
+  try {
+    if (!financeGoal.value.collected || !financeGoal.value.goal) {
+      useToast('Please fill in all fields', 'error')
+      return
+    }
+
+    firebaseStore.updateFinanceGoal(financeGoal.value.collected, financeGoal.value.goal)
+    useToast('Finance goal updated successfully', 'success')
+  }
+  catch (error: any) {
+    useToast(error.message, 'error')
+  }
+}
+
 onMounted(async () => {
   await firebaseStore.fetchFinanceGoal()
 })
@@ -18,6 +33,9 @@ definePageMeta({
       <div class="py-6 flex flex-row justify-between items-center">
         <div class="flex flex-col gap-1">
           <h1>Saving plan</h1>
+          <button class="px-4 py-2 text-sm border border-gray-100 text-white rounded-lg" @click="putFinanceGoal">
+            Save
+          </button>
           <p class="text-sm text-gray-200 flex items-center">
             <NuxtLink to="/dashboard/">
               Dashboard
@@ -29,7 +47,7 @@ definePageMeta({
       </div>
       <div class="flex-row flex gap-6 py-6">
         <div class="w-1/3">
-          <Tile subtitle="Enter collected and goal amount " title="Saving Goal">
+          <Tile button-text="Save" subtitle="Enter collected and goal amount" title="Saving Goal">
             <div class="flex gap-4 mb-8">
               <div class="w-1/2">
                 <p class="mb-2">

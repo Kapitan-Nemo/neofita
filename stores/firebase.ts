@@ -156,6 +156,14 @@ export const useFirebaseStore = defineStore('firebase', {
         this.financeGoal = financeGoalData as FinanceGoal
       }
     },
+    async updateFinanceGoal(collected: number, goal: number) {
+      const firestore = useNuxtApp().$firestore
+      const auth = useAuth()
+      if (!auth)
+        throw new Error('User not authenticated')
+      const financeGoalRef = doc(firestore, `users-data/${auth.userID}/finance-goal/goal-data/`)
+      await updateDoc(financeGoalRef, { collected, goal })
+    },
   },
   persist: true,
 })
