@@ -5,6 +5,7 @@ export const useFirebaseStore = defineStore('firebase', {
     categories: [] as Category[],
     transactions: [] as Transaction[],
     previousTransactions: [] as Transaction[],
+    financeGoal: { collected: 0, goal: 0 } as FinanceGoal,
   }),
   actions: {
     async createCategory(name: string, color: string) {
@@ -142,6 +143,18 @@ export const useFirebaseStore = defineStore('firebase', {
       const categoryRef = doc(firestore, `users-data/${auth.userID}/finance-category`, categoryId)
       const transactionRef = doc(firestore, `users-data/${auth.userID}/finance-transactions`, id)
       await updateDoc(transactionRef, { amount, date, category: categoryRef })
+    },
+    async fetchFinanceGoal() {
+      const firestore = useNuxtApp().$firestore
+      const auth = useAuth()
+      if (!auth)
+        throw new Error('User not authenticated')
+      const financeGoalRef = doc(firestore, `users-data/${auth.userID}/finance-goal/goal-data/`)
+      const financeGoalDoc = await getDoc(financeGoalRef)
+      const financeGoalData = financeGoalDoc.data()
+      if (financeGoalData) {
+        this.financeGoal = financeGoalData as FinanceGoal
+      }
     },
   },
   persist: true,

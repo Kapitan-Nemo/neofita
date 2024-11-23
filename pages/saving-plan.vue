@@ -1,9 +1,14 @@
 <script setup lang="ts">
+const firebaseStore = useFirebaseStore()
+const financeGoal = computed(() => firebaseStore.financeGoal)
+
+onMounted(async () => {
+  await firebaseStore.fetchFinanceGoal()
+})
+
 definePageMeta({
   middleware: ['auth'],
 })
-const collectedAmount = ref(1052.98)
-const goalAmount = ref(1200)
 </script>
 
 <template>
@@ -31,7 +36,7 @@ const goalAmount = ref(1200)
                   Collected amount
                 </p>
                 <input
-                  v-model="collectedAmount"
+                  v-model="financeGoal.collected"
                   type="number"
                   placeholder="Enter amount"
                   class="w-full min-w-[150px] p-2 mb-2 text-gray-200 outline-none placeholder-gray-200 border border-gray-100 bg-transparent rounded-lg"
@@ -42,7 +47,7 @@ const goalAmount = ref(1200)
                   Goal amount
                 </p>
                 <input
-                  v-model="goalAmount"
+                  v-model="financeGoal.goal"
                   type="number"
                   placeholder="Enter amount"
                   class="w-full min-w-[150px] p-2 mb-2 text-gray-200 outline-none placeholder-gray-200 border border-gray-100 bg-transparent rounded-lg"
@@ -51,7 +56,7 @@ const goalAmount = ref(1200)
             </div>
 
             <p class="text-2xl mb-2">
-              ${{ collectedAmount }} <span class="text-sm text-gray-200"><span class="mx-1">of</span> ${{ goalAmount }}</span>
+              ${{ financeGoal.collected }} <span class="text-sm text-gray-200"><span class="mx-1">of</span> ${{ financeGoal.goal }}</span>
             </p>
             <ChartRange />
           </Tile>

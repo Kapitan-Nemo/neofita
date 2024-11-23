@@ -16,3 +16,8 @@ export interface Transaction {
   color: string
   category: Category
 }
+
+export interface FinanceGoal {
+  collected: number
+  goal: number
+}
