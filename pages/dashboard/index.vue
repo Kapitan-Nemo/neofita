@@ -23,19 +23,19 @@ definePageMeta({
 
       <div class="flex py-6 gap-6">
         <div class="w-1/3">
-          <Tile title="Revenue" :subtitle="`Data from ${dateStore.selectedDates.start.toLocaleDateString()} - ${dateStore.selectedDates.end.toLocaleDateString()}`" button-text="View Report">
+          <Tile title="Revenue" :subtitle="`Data from ${dateStore.selectedDates.start.toLocaleDateString()} - ${dateStore.selectedDates.end.toLocaleDateString()}`" link-text="View Report">
             <ChartLine />
           </Tile>
         </div>
 
         <div class="w-1/3">
-          <Tile title="Daily Expenses" :subtitle="`Data from ${dateStore.selectedDates.start.toLocaleDateString()} - ${dateStore.selectedDates.end.toLocaleDateString()}`" button-text="View Report">
+          <Tile title="Daily Expenses" :subtitle="`Data from ${dateStore.selectedDates.start.toLocaleDateString()} - ${dateStore.selectedDates.end.toLocaleDateString()}`" link-text="View Report">
             <ChartBar />
           </Tile>
         </div>
 
         <div class="w-1/3">
-          <Tile class="h-full" title="Summary" :subtitle="`Data from ${dateStore.selectedDates.start.toLocaleDateString()} - ${dateStore.selectedDates.end.toLocaleDateString()}`" button-text="View Report">
+          <Tile class="h-full" title="Summary" :subtitle="`Data from ${dateStore.selectedDates.start.toLocaleDateString()} - ${dateStore.selectedDates.end.toLocaleDateString()}`" link-text="View Report">
             <ChartDoughnut />
           </Tile>
         </div>
@@ -43,12 +43,12 @@ definePageMeta({
     </div>
     <div class="flex pb-6 gap-6">
       <div class="w-2/3">
-        <Tile class="flex flex-col h-full w-[904px]" title="Daily Transactions" link="/dashboard/manage" :subtitle="`Data from ${dateStore.selectedDates.start.toLocaleDateString()} - ${dateStore.selectedDates.end.toLocaleDateString()}`" button-action="Manage" button-text="View Report">
+        <Tile class="flex flex-col h-full w-[904px]" title="Daily Transactions" link="/dashboard/manage" :subtitle="`Data from ${dateStore.selectedDates.start.toLocaleDateString()} - ${dateStore.selectedDates.end.toLocaleDateString()}`" link-text="Manage">
           <TransactionList />
         </Tile>
       </div>
       <div class="w-1/3 flex flex-col gap-6">
-        <Tile class="flex flex-col gap-4" title="Saving Goal" subtitle="75% Progress" button-text="View Report">
+        <Tile class="flex flex-col gap-4" title="Saving Goal" subtitle="75% Progress" link-text="View Report">
           <p class="text-2xl mb-2">
             $1052.98 <span class="text-sm text-gray-200"><span class="mx-1">of</span> $1,200</span>
           </p>

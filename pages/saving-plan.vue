@@ -47,15 +47,14 @@ definePageMeta({
       </div>
       <div class="flex-row flex gap-6 py-6">
         <div class="w-1/3">
-          <Tile button-text="Save" subtitle="Enter collected and goal amount" title="Saving Goal">
+          <Tile link-text="Save" subtitle="Enter collected and goal amount" title="Saving Goal">
             <div class="flex gap-4 mb-8">
               <div class="w-1/2">
                 <p class="mb-2">
                   Collected amount
                 </p>
                 <input
-                  v-model="financeGoal.collected"
-                  type="number"
+                  v-model.number="financeGoal.collected"
                   placeholder="Enter amount"
                   class="w-full min-w-[150px] p-2 mb-2 text-gray-200 outline-none placeholder-gray-200 border border-gray-100 bg-transparent rounded-lg"
                 >
@@ -65,8 +64,7 @@ definePageMeta({
                   Goal amount
                 </p>
                 <input
-                  v-model="financeGoal.goal"
-                  type="number"
+                  v-model.number="financeGoal.goal"
                   placeholder="Enter amount"
                   class="w-full min-w-[150px] p-2 mb-2 text-gray-200 outline-none placeholder-gray-200 border border-gray-100 bg-transparent rounded-lg"
                 >
