@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { ArcElement, CategoryScale, Chart as ChartJS, DoughnutController, Legend, Title, Tooltip } from 'chart.js'
-import { computed, ref } from 'vue'
 import { Doughnut } from 'vue-chartjs'
 
 const firebaseStore = useFirebaseStore()
@@ -110,7 +109,7 @@ const usedCategories = computed(() => {
     }
   })
 
-  return Array.from(uniqueCategoriesMap.values())
+  return Array.from(uniqueCategoriesMap.values()).sort((a, b) => a.name.localeCompare(b.name))
 })
 
 const chartOptions = ref({

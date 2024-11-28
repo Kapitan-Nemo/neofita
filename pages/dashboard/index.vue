@@ -50,7 +50,7 @@ definePageMeta({
       <div class="w-1/3 flex flex-col gap-6">
         <Tile class="flex flex-col gap-4" title="Saving Goal" subtitle="75% Progress" link-text="View Report">
           <p class="text-2xl mb-2">
-            $1052.98 <span class="text-sm text-gray-200"><span class="mx-1">of</span> $1,200</span>
+            1052.98 <span class="text-sm text-gray-200"><span class="mx-1">of</span> 1,200</span>
           </p>
           <ChartRange />
         </Tile>

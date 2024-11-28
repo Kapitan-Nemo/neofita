@@ -1,5 +1,6 @@
 <script setup lang="ts">
 const firebaseStore = useFirebaseStore()
+const dateStore = useDateStore()
 
 const checkCategories = computed(() => {
   if (firebaseStore.categories.length === 0) {
@@ -30,10 +31,11 @@ definePageMeta({
             </NuxtLink>
           </p>
         </div>
+        <Date />
       </div>
       <div class="flex-row flex gap-6 py-6">
         <div class="w-2/3">
-          <Tile :active="checkCategories" class="w-[904px]" title="Transactions" link-text="Add transaction" modal-id="transactionModal">
+          <Tile :subtitle="`Data from ${dateStore.selectedDates.start.toLocaleDateString()} - ${dateStore.selectedDates.end.toLocaleDateString()}`" :active="checkCategories" class="w-[904px]" title="Transactions" link-text="Add transaction" modal-id="transactionModal">
             <TransactionListEdit />
           </Tile>
         </div>
