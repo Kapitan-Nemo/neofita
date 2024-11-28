@@ -29,7 +29,7 @@ const centerTextPlugin = {
     ctx.textBaseline = 'middle'
     ctx.fillStyle = '#FFF' // Set text color to white
 
-    const text = `$${totalAmount.value.toFixed(2)}` // Display the total amount with a dollar sign at the end
+    const text = `${totalAmount.value.toFixed(2)}` // Display the total amount with a dollar sign at the end
     const textX = Math.round((width - ctx.measureText(text).width) / 2)
     const textY = height / 2
 

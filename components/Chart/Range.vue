@@ -1,5 +1,8 @@
-<script setup>
+<script setup lang="ts">
 const emit = defineEmits(['update:modelValue'])
+
+const firebaseStore = useFirebaseStore()
+const financeGoal = firebaseStore.financeGoal
 
 const sliderValue = ref(75)
 const slider = ref(null)

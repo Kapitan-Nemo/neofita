@@ -4,6 +4,7 @@ const props = defineProps<Partial<{
   subtitle: string
   link: string
   linkText: string
+  action: () => void
   active: boolean
   modalId: string
   class: string
@@ -35,7 +36,10 @@ function openModal() {
         <NuxtLink v-if="linkText && link" :to="link" class="flex items-center gap-4 px-4 py-2 text-sm border border-gray-100 text-white rounded-lg">
           {{ linkText }}<Icon name="ion:edit" />
         </NuxtLink>
-        <button v-if="linkText && !link" :disabled="!active" class="px-4 py-2 text-sm border border-gray-100 text-white rounded-lg" @click="openModal">
+        <button v-if="linkText && !link && !action" :disabled="!active" class="px-4 py-2 text-sm border border-gray-100 text-white rounded-lg" @click="openModal">
+          {{ linkText }}
+        </button>
+        <button v-if="props.action" class="px-4 py-2 text-sm border border-gray-100 text-white rounded-lg" @click="props.action">
           {{ linkText }}
         </button>
       </div>

@@ -33,9 +33,6 @@ definePageMeta({
       <div class="py-6 flex flex-row justify-between items-center">
         <div class="flex flex-col gap-1">
           <h1>Saving plan</h1>
-          <button class="px-4 py-2 text-sm border border-gray-100 text-white rounded-lg" @click="putFinanceGoal">
-            Save
-          </button>
           <p class="text-sm text-gray-200 flex items-center">
             <NuxtLink to="/dashboard/">
               Dashboard
@@ -47,7 +44,7 @@ definePageMeta({
       </div>
       <div class="flex-row flex gap-6 py-6">
         <div class="w-1/3">
-          <Tile link-text="Save" subtitle="Enter collected and goal amount" title="Saving Goal">
+          <Tile link-text="Save" :action="putFinanceGoal" subtitle="Enter collected and goal amount" title="Saving Goal">
             <div class="flex gap-4 mb-8">
               <div class="w-1/2">
                 <p class="mb-2">
