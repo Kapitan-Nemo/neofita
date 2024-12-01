@@ -66,6 +66,9 @@ export const useFirebaseStore = defineStore('firebase', {
       const dateStore = useDateStore()
 
       const fetchAndSetTransactions = async () => {
+        console.log('START', dateStore.selectedDates.start)
+        console.log('END', dateStore.selectedDates.end)
+
         const startDateObj = new Date(dateStore.selectedDates.start)
         startDateObj.setMonth(startDateObj.getMonth() - 1)
 
@@ -79,6 +82,7 @@ export const useFirebaseStore = defineStore('firebase', {
         const endPreviousDate = Timestamp.fromDate(endDateObj)
 
         const transactionsRef = collection(firestore, `users-data/${auth.userID}/finance-transactions`)
+
         const transactionsQuery = query(
           transactionsRef,
           orderBy('date', 'desc'),
