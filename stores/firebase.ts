@@ -66,8 +66,6 @@ export const useFirebaseStore = defineStore('firebase', {
       const dateStore = useDateStore()
 
       const fetchAndSetTransactions = async () => {
-        console.log('START', dateStore.selectedDates.start)
-        console.log('END', dateStore.selectedDates.end)
 
         const startDateObj = new Date(dateStore.selectedDates.start)
         startDateObj.setMonth(startDateObj.getMonth() - 1)
