@@ -9,8 +9,6 @@ export const useDateStore = defineStore('dateStore', () => {
   const middleOfMonth1 = new Date(year, month, 12, 23, 59, 59, 999)
   const middleOfMonth2 = new Date(year, month, 22, 23, 59, 59, 999)
   let start, end
-  console.log('START', start)
-  console.log('END', end)
   switch (true) {
     case now <= middleOfMonth1:
       start = startOfMonth
