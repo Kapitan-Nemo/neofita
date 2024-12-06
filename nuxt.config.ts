@@ -29,6 +29,7 @@ export default defineNuxtConfig({
     '/': { prerender: true },
     // Admin dashboard renders only on client-side
     '/dashboard/**': { ssr: false },
+    '/saving-plan': { ssr: false },
   },
   pinia: {
     storesDirs: ['./stores/**'],
