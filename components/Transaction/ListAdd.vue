@@ -4,19 +4,7 @@ const modalStore = useModalStore()
 const categories = computed(() => firebaseStore.categories)
 const amount = ref(0)
 
-// Function to format date to 'yyyy-MM-ddTHH:mm:ss'
-function formatDateToLocal(date: Date): string {
-  const pad = (num: number) => num.toString().padStart(2, '0')
-  const year = date.getFullYear()
-  const month = pad(date.getMonth() + 1)
-  const day = pad(date.getDate())
-  const hours = pad(date.getHours())
-  const minutes = pad(date.getMinutes())
-  const seconds = pad(date.getSeconds())
-  return `${year}-${month}-${day}T${hours}:${minutes}:${seconds}`
-}
-
-const date = ref(formatDateToLocal(new Date())) // Format for datetime-local with seconds
+const date = ref(new Date())
 const selectedCategory = ref('')
 
 async function createFinance() {
@@ -54,8 +42,25 @@ onMounted(() => {
       <input id="add_amount" v-model="amount" class="w-full min-w-[150px] p-2 text-gray-200 outline-none placeholder-gray-200 border border-gray-100 bg-transparent rounded-lg" type="number" placeholder="Amount">
     </div>
     <div class="flex flex-col">
-      <label for="add_date" class="">Date</label>
-      <input id="add_date" v-model="date" class="w-full min-w-[150px] p-2 text-gray-200 outline-none placeholder-gray-200 border border-gray-100 bg-transparent rounded-lg" type="datetime-local">
+      <VDatePicker
+        v-model="date"
+        mode="dateTime"
+        is24hr
+        :time-accuracy="3"
+        :style="{ backgroundColor: '#1e1e1e', border: '1px solid #454545' }"
+        color="red"
+        is-dark
+      >
+        <template #default="{ togglePopover }">
+          <button
+            class="cursor-pointer flex justify-between w-full min-w-[150px] p-2 text-gray-200 outline-none placeholder-gray-200 border border-gray-100 bg-transparent rounded-lg"
+            @click="togglePopover"
+          >
+            {{ formatDate(date, 'string') }}
+            <Icon size="20" name="ion:calendar-sharp" />
+          </button>
+        </template>
+      </VDatePicker>
     </div>
     <div class="flex flex-col">
       <label for="add_category" class="">Category</label>
