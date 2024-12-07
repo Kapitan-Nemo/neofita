@@ -4,7 +4,9 @@ const emit = defineEmits(['update:modelValue'])
 const firebaseStore = useFirebaseStore()
 const financeGoal = firebaseStore.financeGoal
 
-const sliderValue = ref(75)
+const sliderValue = computed(() => {
+  return (financeGoal.collected / financeGoal.goal) * 100
+})
 const slider = ref(null)
 
 function getProgress(value, min, max) {
@@ -25,6 +27,9 @@ watchEffect(() => {
 </script>
 
 <template>
+  <p class="text-2xl mb-2">
+    {{ financeGoal.collected }}<span class="text-sm text-gray-200"><span class="mx-1">of</span>{{ financeGoal.goal }}</span>
+  </p>
   <div class="custom-slider">
     <input
       ref="slider"

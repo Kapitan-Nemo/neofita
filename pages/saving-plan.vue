@@ -67,10 +67,6 @@ definePageMeta({
                 >
               </div>
             </div>
-
-            <p class="text-2xl mb-2">
-              {{ financeGoal.collected }} <span class="text-sm text-gray-200"><span class="mx-1">of</span> {{ financeGoal.goal }}</span>
-            </p>
             <ChartRange />
           </Tile>
         </div>
