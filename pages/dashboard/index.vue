@@ -9,9 +9,9 @@ definePageMeta({
 
 <template>
   <div>
-    <Nav class="border-b border-gray-100" />
+    <Nav />
     <div class="flex flex-col">
-      <div class="py-6 flex flex-row justify-between items-center">
+      <div class="py-6 flex gap-4 lg:gap-0 flex-col lg:flex-row justify-between lg:items-center">
         <div class="flex flex-col gap-1">
           <h1>Dashboard</h1>
           <p class="text-sm text-gray-200">
@@ -21,33 +21,33 @@ definePageMeta({
         <Date />
       </div>
 
-      <div class="flex py-6 gap-6">
-        <div class="w-1/3">
+      <div class="flex flex-col lg:flex-row py-6 gap-6">
+        <div class="lg:w-1/3 w-full">
           <Tile title="Revenue" :subtitle="`Data from ${dateStore.selectedDates.start.toLocaleDateString()} - ${dateStore.selectedDates.end.toLocaleDateString()}`" link-text="View Report">
             <ChartLine />
           </Tile>
         </div>
 
-        <div class="w-1/3">
+        <div class="lg:w-1/3 w-full">
           <Tile title="Daily Expenses" :subtitle="`Data from ${dateStore.selectedDates.start.toLocaleDateString()} - ${dateStore.selectedDates.end.toLocaleDateString()}`" link-text="View Report">
             <ChartBar />
           </Tile>
         </div>
 
-        <div class="w-1/3">
+        <div class="lg:w-1/3 w-full">
           <Tile class="h-full" title="Summary" :subtitle="`Data from ${dateStore.selectedDates.start.toLocaleDateString()} - ${dateStore.selectedDates.end.toLocaleDateString()}`" link-text="View Report">
             <ChartDoughnut />
           </Tile>
         </div>
       </div>
     </div>
-    <div class="flex pb-6 gap-6">
-      <div class="w-2/3">
-        <Tile class="flex flex-col h-full w-[904px]" title="Daily Transactions" link="/dashboard/manage" :subtitle="`Data from ${dateStore.selectedDates.start.toLocaleDateString()} - ${dateStore.selectedDates.end.toLocaleDateString()}`" link-text="Manage">
+    <div class="flex flex-col lg:flex-row pb-6 gap-6">
+      <div class="lg:w-2/3 w-full">
+        <Tile class="flex flex-col h-full lg:w-[904px]" title="Daily Transactions" link="/dashboard/manage" :subtitle="`Data from ${dateStore.selectedDates.start.toLocaleDateString()} - ${dateStore.selectedDates.end.toLocaleDateString()}`" link-text="Manage">
           <TransactionList />
         </Tile>
       </div>
-      <div class="w-1/3 flex flex-col gap-6">
+      <div class="lg:w-1/3 w-full flex flex-col gap-6">
         <Tile class="flex flex-col gap-4" title="Saving Goal" subtitle="75% Progress" link-text="View Report">
           <ChartRange />
         </Tile>

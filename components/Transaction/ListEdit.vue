@@ -119,7 +119,7 @@ onMounted(async () => {
           <span class="w-6 h-6 text-xs flex justify-center items-center p-2 rounded-full text-white" :style="{ backgroundColor: t.category.color || '#000' }">
             {{ t.category.name?.trim().charAt(0).toUpperCase() || 'U' }}
           </span>
-          {{ t.category.name || 'Uncategorized' }}
+          <span class="hidden lg:flex">{{ t.category.name || 'Uncategorized' }}</span>
         </div>
       </div>
       <div class="column">

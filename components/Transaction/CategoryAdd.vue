@@ -4,7 +4,7 @@ import { ref } from 'vue'
 
 const firebaseStore = useFirebaseStore()
 const name = ref('')
-const color = ref('#000000')
+const color = ref('#cd1c21')
 
 async function addCategory() {
   if (name.value.trim() === '') {

@@ -18,9 +18,9 @@ definePageMeta({
 
 <template>
   <div>
-    <Nav class="border-b border-gray-100" />
+    <Nav />
     <div class="flex flex-col">
-      <div class="py-6 flex flex-row justify-between items-center">
+      <div class="py-6 gap-4 lg:gap-0 flex flex-col lg:flex-row justify-between lg:items-center">
         <div class="flex flex-col gap-1">
           <h1>Add / Edit finances</h1>
           <p class="text-sm text-gray-200 flex items-center">
@@ -33,13 +33,13 @@ definePageMeta({
         </div>
         <Date />
       </div>
-      <div class="flex-row flex gap-6 py-6">
-        <div class="w-2/3">
-          <Tile :subtitle="`Data from ${dateStore.selectedDates.start.toLocaleDateString()} - ${dateStore.selectedDates.end.toLocaleDateString()}`" :active="checkCategories" class="w-[904px]" title="Transactions" link-text="Add transaction" modal-id="transactionModal">
+      <div class="flex-col lg:flex-row flex gap-6 py-6">
+        <div class="lg:w-2/3 w-full">
+          <Tile :subtitle="`Data from ${dateStore.selectedDates.start.toLocaleDateString()} - ${dateStore.selectedDates.end.toLocaleDateString()}`" :active="checkCategories" class="lg:w-[904px] w-full" title="Transactions" link-text="Add transaction" modal-id="transactionModal">
             <TransactionListEdit />
           </Tile>
         </div>
-        <div class="w-1/3">
+        <div class="lg:w-1/3 w-full">
           <Tile :active="true" title="Categories" link-text="Add category" modal-id="categoryModal">
             <TransactionCategory />
           </Tile>

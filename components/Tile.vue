@@ -32,7 +32,7 @@ function openModal() {
           {{ subtitle }}
         </p>
       </div>
-      <div class="flex gap-4">
+      <div class="flex whitespace-nowrap gap-4">
         <NuxtLink v-if="linkText && link" :to="link" class="flex items-center gap-4 px-4 py-2 text-sm border border-gray-100 text-white rounded-lg">
           {{ linkText }}<Icon name="ion:edit" />
         </NuxtLink>

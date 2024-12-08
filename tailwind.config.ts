@@ -12,7 +12,6 @@ export default {
     extend: {
       fontFamily: {
         sans: ['Montserrat', ...defaultTheme.fontFamily.sans],
-        // mono: ['Windows Command Prompt', ...defaultTheme.fontFamily.mono],
       },
       colors: {
         black: {

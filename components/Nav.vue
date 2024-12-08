@@ -4,6 +4,7 @@ import { getAuth, signOut } from 'firebase/auth'
 const auth = useAuth()
 const photo = ref()
 const router = useRouter()
+const showMenu = ref(false)
 
 function logout() {
   signOut(getAuth())
@@ -23,7 +24,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <nav class="w-full my-6">
+  <nav class="w-full pb-4 lg:pb-0 my-6 border-b border-gray-100">
     <div class="flex items-center justify-between">
       <div>
         <nuxt-link to="/dashboard">
@@ -31,7 +32,7 @@ onMounted(() => {
         </nuxt-link>
       </div>
 
-      <div class="flex gap-12">
+      <div :class="(showMenu === false ? 'hidden' : 'flex absolute top-0 left-0 m-0 p-5 bg-black w-full h-full z-50')" class=" flex-col lg:flex-row lg:flex lg:gap-12">
         <nuxt-link to="/dashboard" class="menu-link">
           Dashboard
         </nuxt-link>
@@ -47,7 +48,11 @@ onMounted(() => {
         <nuxt-link to="/" class="menu-link">
           Account
         </nuxt-link>
+        <!-- Close icon -->
+        <Icon size="30" name="ion:close-outline" class="lg:hidden top-10 absolute right-8" @click="showMenu = !showMenu" />
       </div>
+
+      <Icon size="30" name="ion:menu-outline" class="lg:hidden" @click="showMenu = !showMenu" />
 
       <Dropdown>
         <template #trigger>

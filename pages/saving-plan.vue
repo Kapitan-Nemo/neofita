@@ -28,7 +28,7 @@ definePageMeta({
 
 <template>
   <div>
-    <Nav class="border-b border-gray-100" />
+    <Nav />
     <div class="flex flex-col">
       <div class="py-6 flex flex-row justify-between items-center">
         <div class="flex flex-col gap-1">
@@ -42,8 +42,8 @@ definePageMeta({
           </p>
         </div>
       </div>
-      <div class="flex-row flex gap-6 py-6">
-        <div class="w-1/3">
+      <div class="flex-col lg:flex-row flex gap-6 py-6">
+        <div class="w-full lg:w-1/3">
           <Tile link-text="Save" :action="putFinanceGoal" subtitle="Enter collected and goal amount" title="Saving Goal">
             <div class="flex gap-4 mb-8">
               <div class="w-1/2">
@@ -56,7 +56,7 @@ definePageMeta({
                   class="w-full min-w-[150px] p-2 mb-2 text-gray-200 outline-none placeholder-gray-200 border border-gray-100 bg-transparent rounded-lg"
                 >
               </div>
-              <div class="w-1/2">
+              <div class="w-full lg:w-1/2">
                 <p class="mb-2">
                   Goal amount
                 </p>
