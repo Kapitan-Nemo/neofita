@@ -88,6 +88,7 @@ watch(categoryColor, (newColor) => {
             class="w-full min-w-[150px] p-2 text-gray-200 outline-none placeholder-gray-200 border border-gray-100 bg-transparent rounded-lg"
           >
           <input ref="colorPickerRef" v-model="categoryColor" type="color" class="w-8 h-8 p-0 border-none bg-transparent ml-2">
+          <ColorPicker />
         </div>
         <div v-else>
           {{ category.name }}

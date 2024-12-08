@@ -38,10 +38,11 @@ onMounted(() => {
 <template>
   <div class="flex flex-col gap-4">
     <div class="flex flex-col">
-      <label for="add_amount" class="">Amount</label>
+      <label for="add_amount">Amount</label>
       <input id="add_amount" v-model="amount" class="w-full min-w-[150px] p-2 text-gray-200 outline-none placeholder-gray-200 border border-gray-100 bg-transparent rounded-lg" type="number" placeholder="Amount">
     </div>
     <div class="flex flex-col">
+      <label for="add_date">Date</label>
       <VDatePicker
         v-model="date"
         mode="dateTime"
@@ -63,7 +64,7 @@ onMounted(() => {
       </VDatePicker>
     </div>
     <div class="flex flex-col">
-      <label for="add_category" class="">Category</label>
+      <label for="add_category">Category</label>
       <select id="add_category" v-model="selectedCategory" class="w-full min-w-[150px] p-2 text-gray-200 outline-none placeholder-gray-200 border border-gray-100 bg-transparent rounded-lg">
         <option v-for="category in categories" :key="category.id" :value="category.id">
           {{ category.name }}
