@@ -10,7 +10,9 @@ export default defineNuxtConfig({
     '@pinia/nuxt',
     'pinia-plugin-persistedstate/nuxt',
     '@nuxt/icon',
+    '@nuxt/image',
     '@samk-dev/nuxt-vcalendar',
+    '@nuxt/image',
   ],
   runtimeConfig: {
     public: {
@@ -23,13 +25,6 @@ export default defineNuxtConfig({
       FIREBASE_MEASUREMENTID: process.env.FIREBASE_MEASUREMENTID,
       FIREBASE_ADMINID: process.env.FIREBASE_ADMINID,
     },
-  },
-  routeRules: {
-    // Homepage pre-rendered at build time
-    '/': { prerender: true },
-    // Admin dashboard renders only on client-side
-    '/dashboard/**': { ssr: false },
-    '/saving-plan': { ssr: false },
   },
   pinia: {
     storesDirs: ['./stores/**'],

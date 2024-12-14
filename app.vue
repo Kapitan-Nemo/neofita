@@ -1,3 +1,17 @@
+<script setup lang="ts">
+useSeoMeta({
+  title: 'Neofita - Your Financial Companion',
+  ogTitle: 'Neofita - Your Financial Companion',
+  description: 'Neofita helps you manage your finances and achieve your financial goals with ease.',
+  ogDescription: 'Discover Neofita, your ultimate financial companion. Manage your finances and achieve your financial goals effortlessly.',
+  ogImage: 'https://example.com/og-image.png',
+  twitterCard: 'summary_large_image',
+  twitterTitle: 'Neofita - Your Financial Companion',
+  twitterDescription: 'Manage your finances and achieve your financial goals with Neofita.',
+  twitterImage: 'https://example.com/twitter-image.png',
+})
+</script>
+
 <template>
   <main class="container flex flex-col min-h-dvh">
     <NuxtLayout>

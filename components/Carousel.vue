@@ -28,31 +28,31 @@ onUnmounted(() => {
 
 <template>
   <div class="slideshow-container">
-    <div class="slideshow gap-6">
-      <img src="/assets/img/9_gates/card-1.png" alt="image">
-      <img src="/assets/img/9_gates/card-2.png" alt="image">
-      <img src="/assets/img/9_gates/card-3.png" alt="image">
-      <img src="/assets/img/9_gates/card-4.png" alt="image">
-      <img src="/assets/img/9_gates/card-5.png" alt="image">
-      <img src="/assets/img/9_gates/card-6.png" alt="image">
-      <img src="/assets/img/9_gates/card-7.png" alt="image">
-      <img src="/assets/img/9_gates/card-8.png" alt="image">
-      <img src="/assets/img/9_gates/card-9.png" alt="image">
+    <div class="slideshow">
+      <NuxtPicture class="rounded-xl" preload format="avif,webp" src="/assets/img/9_gates/card-1.png" />
+      <NuxtPicture preload format="avif,webp" src="/assets/img/9_gates/card-2.png" />
+      <NuxtPicture preload format="avif,webp" src="/assets/img/9_gates/card-3.png" />
+      <NuxtPicture preload format="avif,webp" src="/assets/img/9_gates/card-4.png" />
+      <NuxtPicture preload format="avif,webp" src="/assets/img/9_gates/card-5.png" />
+      <NuxtPicture preload format="avif,webp" src="/assets/img/9_gates/card-6.png" />
+      <NuxtPicture preload format="avif,webp" src="/assets/img/9_gates/card-7.png" />
+      <NuxtPicture preload format="avif,webp" src="/assets/img/9_gates/card-8.png" />
+      <NuxtPicture preload format="avif,webp" src="/assets/img/9_gates/card-9.png" />
       <!-- Duplicate images for seamless looping -->
-      <img src="/assets/img/9_gates/card-1.png" alt="image">
-      <img src="/assets/img/9_gates/card-2.png" alt="image">
-      <img src="/assets/img/9_gates/card-3.png" alt="image">
-      <img src="/assets/img/9_gates/card-4.png" alt="image">
-      <img src="/assets/img/9_gates/card-5.png" alt="image">
-      <img src="/assets/img/9_gates/card-6.png" alt="image">
-      <img src="/assets/img/9_gates/card-7.png" alt="image">
-      <img src="/assets/img/9_gates/card-8.png" alt="image">
-      <img src="/assets/img/9_gates/card-9.png" alt="image">
+      <NuxtPicture format="avif,webp" src="/assets/img/9_gates/card-1.png" />
+      <NuxtPicture format="avif,webp" src="/assets/img/9_gates/card-2.png" />
+      <NuxtPicture format="avif,webp" src="/assets/img/9_gates/card-3.png" />
+      <NuxtPicture format="avif,webp" src="/assets/img/9_gates/card-4.png" />
+      <NuxtPicture format="avif,webp" src="/assets/img/9_gates/card-5.png" />
+      <NuxtPicture format="avif,webp" src="/assets/img/9_gates/card-6.png" />
+      <NuxtPicture format="avif,webp" src="/assets/img/9_gates/card-7.png" />
+      <NuxtPicture format="avif,webp" src="/assets/img/9_gates/card-8.png" />
+      <NuxtPicture format="avif,webp" src="/assets/img/9_gates/card-9.png" />
     </div>
   </div>
 </template>
 
-<style scoped>
+<style lang="scss">
 .slideshow-container {
   @apply mt-6;
   overflow: hidden;
@@ -64,13 +64,12 @@ onUnmounted(() => {
   width: max-content;
   @apply gap-6;
   animation: scroll 30s linear infinite;
-}
-
-.slideshow img {
-  height: auto;
-  max-height: 50vh;
-  width: 300px; /* Adjust to your desired width */
-  border-radius: 20px;
+  img {
+    height: auto;
+    max-height: 50dvh;
+    width: 300px; /* Adjust to your desired width */
+    border-radius: 20px;
+  }
 }
 
 @keyframes scroll {
