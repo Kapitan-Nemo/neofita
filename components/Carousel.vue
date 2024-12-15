@@ -65,9 +65,8 @@ onUnmounted(() => {
   @apply gap-6;
   animation: scroll 30s linear infinite;
   img {
-    height: auto;
-    max-height: 50dvh;
-    width: 300px; /* Adjust to your desired width */
+    width: 30dvh;
+    @apply max-sm:w-40;
     border-radius: 20px;
   }
 }
