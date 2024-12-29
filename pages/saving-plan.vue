@@ -67,7 +67,6 @@ definePageMeta({
                 >
               </div>
             </div>
-            <ChartRange />
           </Tile>
         </div>
       </div>
