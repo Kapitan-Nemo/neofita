@@ -36,7 +36,7 @@ onMounted(() => {
         <nuxt-link to="/dashboard" class="menu-link">
           Dashboard
         </nuxt-link>
-        <nuxt-link to="/saving-plan/" class="menu-link">
+        <nuxt-link to="/saving-plan" class="menu-link">
           Saving Plan
         </nuxt-link>
         <nuxt-link to="/" class="menu-link">
