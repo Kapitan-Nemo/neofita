@@ -48,7 +48,7 @@ definePageMeta({
         </Tile>
       </div>
       <div class="lg:w-1/3 w-full flex flex-col gap-6">
-        <Tile class="flex flex-col gap-4" title="Saving Goal" subtitle="75% Progress" link-text="View Report">
+        <Tile class="flex flex-col gap-4" title="Saving Goal" subtitle="75% Progress" link="/saving-plan" link-text="Manage">
           <ChartRange />
         </Tile>
 
