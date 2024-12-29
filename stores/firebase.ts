@@ -5,7 +5,7 @@ export const useFirebaseStore = defineStore('firebase', {
     categories: [] as Category[],
     transactions: [] as Transaction[],
     previousTransactions: [] as Transaction[],
-    financeGoal: { collected: 0, goal: 0 } as FinanceGoal,
+    financeGoal: { collected: 0, goal: 0, description: '' } as FinanceGoal,
   }),
   actions: {
     async createCategory(name: string, color: string) {
@@ -66,7 +66,6 @@ export const useFirebaseStore = defineStore('firebase', {
       const dateStore = useDateStore()
 
       const fetchAndSetTransactions = async () => {
-
         const startDateObj = new Date(dateStore.selectedDates.start)
         startDateObj.setMonth(startDateObj.getMonth() - 1)
 
@@ -158,13 +157,13 @@ export const useFirebaseStore = defineStore('firebase', {
         this.financeGoal = financeGoalData as FinanceGoal
       }
     },
-    async updateFinanceGoal(collected: number, goal: number) {
+    async updateFinanceGoal(collected: number, goal: number, description: string) {
       const firestore = useNuxtApp().$firestore
       const auth = useAuth()
       if (!auth)
         throw new Error('User not authenticated')
       const financeGoalRef = doc(firestore, `users-data/${auth.userID}/finance-goal/goal-data/`)
-      await updateDoc(financeGoalRef, { collected, goal })
+      await updateDoc(financeGoalRef, { collected, goal, description })
     },
   },
   persist: true,

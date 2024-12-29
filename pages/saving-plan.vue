@@ -9,7 +9,7 @@ function putFinanceGoal() {
       return
     }
 
-    firebaseStore.updateFinanceGoal(financeGoal.value.collected, financeGoal.value.goal)
+    firebaseStore.updateFinanceGoal(financeGoal.value.collected, financeGoal.value.goal, financeGoal.value.description)
     useToast('Finance goal updated successfully', 'success')
   }
   catch (error: any) {
@@ -66,6 +66,16 @@ definePageMeta({
                   class="w-full min-w-[150px] p-2 mb-2 text-gray-200 outline-none placeholder-gray-200 border border-gray-100 bg-transparent rounded-lg"
                 >
               </div>
+            </div>
+            <div class="w-full">
+              <p class="mb-2">
+                Description
+              </p>
+              <textarea
+                v-model="financeGoal.description"
+                placeholder="Enter description"
+                class="w-full p-2 mb-2 text-gray-200 outline-none placeholder-gray-200 border border-gray-100 bg-transparent rounded-lg"
+              />
             </div>
           </Tile>
         </div>

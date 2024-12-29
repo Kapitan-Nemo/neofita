@@ -20,4 +20,5 @@ export interface Transaction {
 export interface FinanceGoal {
   collected: number
   goal: number
+  description: string
 }
