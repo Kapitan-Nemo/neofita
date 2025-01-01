@@ -35,7 +35,7 @@ definePageMeta({
       </div>
       <div class="flex-col lg:flex-row flex gap-6 py-6">
         <div class="lg:w-2/3 w-full">
-          <Tile :subtitle="`Data from ${dateStore.selectedDates.start.toLocaleDateString()} - ${dateStore.selectedDates.end.toLocaleDateString()}`" :active="checkCategories" class="lg:w-[904px] w-full" title="Transactions" link-text="Add transaction" modal-id="transactionModal">
+          <Tile :subtitle="`Data from ${dateStore.selectedDates.start.toLocaleDateString('en-GB')} - ${dateStore.selectedDates.end.toLocaleDateString('en-GB')}`" :active="checkCategories" class="lg:w-[904px] w-full" title="Transactions" link-text="Add transaction" modal-id="transactionModal">
             <TransactionListEdit />
           </Tile>
         </div>

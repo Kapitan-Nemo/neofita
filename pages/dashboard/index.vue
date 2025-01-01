@@ -23,19 +23,19 @@ definePageMeta({
 
       <div class="flex flex-col lg:flex-row py-6 gap-6">
         <div class="lg:w-1/3 w-full">
-          <Tile title="Revenue" :subtitle="`Data from ${dateStore.selectedDates.start.toLocaleDateString()} - ${dateStore.selectedDates.end.toLocaleDateString()}`" link-text="View Report">
+          <Tile title="Revenue" :subtitle="`Data from ${dateStore.selectedDates.start.toLocaleDateString('en-GB')} - ${dateStore.selectedDates.end.toLocaleDateString('en-GB')}`" link-text="View Report">
             <ChartLine />
           </Tile>
         </div>
 
         <div class="lg:w-1/3 w-full">
-          <Tile title="Daily Expenses" :subtitle="`Data from ${dateStore.selectedDates.start.toLocaleDateString()} - ${dateStore.selectedDates.end.toLocaleDateString()}`" link-text="View Report">
+          <Tile title="Daily Expenses" :subtitle="`Data from ${dateStore.selectedDates.start.toLocaleDateString('en-GB')} - ${dateStore.selectedDates.end.toLocaleDateString('en-GB')}`" link-text="View Report">
             <ChartBar />
           </Tile>
         </div>
 
         <div class="lg:w-1/3 w-full">
-          <Tile class="h-full" title="Summary" :subtitle="`Data from ${dateStore.selectedDates.start.toLocaleDateString()} - ${dateStore.selectedDates.end.toLocaleDateString()}`" link-text="View Report">
+          <Tile class="h-full" title="Summary" :subtitle="`Data from ${dateStore.selectedDates.start.toLocaleDateString('en-GB')} - ${dateStore.selectedDates.end.toLocaleDateString('en-GB')}`" link-text="View Report">
             <ChartDoughnut />
           </Tile>
         </div>
@@ -43,7 +43,7 @@ definePageMeta({
     </div>
     <div class="flex flex-col lg:flex-row pb-6 gap-6">
       <div class="lg:w-2/3 w-full">
-        <Tile class="flex flex-col h-full lg:w-[904px]" title="Daily Transactions" link="/dashboard/manage" :subtitle="`Data from ${dateStore.selectedDates.start.toLocaleDateString()} - ${dateStore.selectedDates.end.toLocaleDateString()}`" link-text="Manage">
+        <Tile class="flex flex-col h-full lg:w-[904px]" title="Daily Transactions" link="/dashboard/manage" :subtitle="`Data from ${dateStore.selectedDates.start.toLocaleDateString('en-GB')} - ${dateStore.selectedDates.end.toLocaleDateString('en-GB')}`" link-text="Manage">
           <TransactionList />
         </Tile>
       </div>
