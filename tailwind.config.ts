@@ -26,6 +26,9 @@ export default {
         red: {
           DEFAULT: '#cd1c21',
         },
+        green: {
+          DEFAULT: '#2ABF7D',
+        },
       },
       screens: {
         '2xl': '1400px',
