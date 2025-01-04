@@ -1,7 +1,5 @@
 <script setup lang="ts">
 const firebaseStore = useFirebaseStore()
-firebaseStore.fetchFinanceGoal()
-
 const financeGoal = firebaseStore.financeGoal
 
 const sliderValue = computed(() => {
@@ -15,7 +13,8 @@ function setCSSProgress(progress) {
   }
 }
 
-onMounted(() => {
+onMounted(async () => {
+  await firebaseStore.fetchFinanceGoal()
   watchEffect(() => {
     const progress = sliderValue.value
     setCSSProgress(progress)
