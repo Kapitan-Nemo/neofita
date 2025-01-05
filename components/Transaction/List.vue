@@ -19,6 +19,9 @@ onMounted(async () => {
       <div class="column">
         Amount
       </div>
+      <div class="column">
+        Description
+      </div>
     </div>
     <div v-for="t in transactions" :key="t.id" class="row">
       <div class="column flex gap-4">
@@ -34,6 +37,9 @@ onMounted(async () => {
       </div>
       <div class="column">
         {{ t.amount }}
+      </div>
+      <div class="column">
+        {{ t.description }}
       </div>
     </div>
     <TransactionListEmpty v-if="!transactions.length" />

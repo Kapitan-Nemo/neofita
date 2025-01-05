@@ -3,6 +3,7 @@ const firebaseStore = useFirebaseStore()
 const modalStore = useModalStore()
 const categories = computed(() => firebaseStore.categories)
 const amount = ref(0)
+const description = ref('')
 
 const date = ref(new Date())
 const selectedCategory = ref('')
@@ -20,6 +21,7 @@ async function createFinance() {
       amount.value,
       dateObject,
       selectedCategory.value,
+      description.value,
     )
     modalStore.closeModal()
     useToast('Transaction created successfully', 'success')
@@ -39,7 +41,7 @@ onMounted(() => {
   <div class="flex flex-col gap-4">
     <div class="flex flex-col">
       <label for="add_amount">Amount</label>
-      <input id="add_amount" v-model="amount" class="w-full min-w-[150px] p-2 text-gray-200 outline-none placeholder-gray-200 border border-gray-100 bg-transparent rounded-lg" type="number" placeholder="Amount">
+      <input id="add_amount" v-model.number="amount" class="w-full min-w-[150px] p-2 text-gray-200 outline-none placeholder-gray-200 border border-gray-100 bg-transparent rounded-lg" type="number" placeholder="Amount">
     </div>
     <div class="flex flex-col">
       <label for="add_date">Date</label>
@@ -70,6 +72,11 @@ onMounted(() => {
           {{ category.name }}
         </option>
       </select>
+    </div>
+
+    <div>
+      <label for="add_description">Description</label>
+      <textarea id="add_description" v-model="description" class="w-full min-w-[150px] p-2 text-gray-200 outline-none placeholder-gray-200 border border-gray-100 bg-transparent rounded-lg" placeholder="Description" />
     </div>
 
     <button class="mt-4 px-4 border-gray-100 py-2 text-sm border text-white rounded-lg" @click="createFinance">

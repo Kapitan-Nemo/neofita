@@ -14,6 +14,7 @@ export interface Transaction {
   date: Timestamp
   amount: number
   color: string
+  description: string
   category: Category
 }
 

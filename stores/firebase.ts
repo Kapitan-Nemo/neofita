@@ -48,13 +48,13 @@ export const useFirebaseStore = defineStore('firebase', {
       const categoryRef = doc(firestore, `users-data/${auth.userID}/finance-category`, id)
       await deleteDoc(categoryRef)
     },
-    async createTransaction(amount: number, date: Date, categoryId: string) {
+    async createTransaction(amount: number, date: Date, categoryId: string, description: string) {
       const firestore = useNuxtApp().$firestore
       const auth = useAuth()
       if (!auth)
         throw new Error('User not authenticated')
       const categoryRef = doc(firestore, `users-data/${auth.userID}/finance-category`, categoryId)
-      const newTransactionRef = await addDoc(collection(firestore, `users-data/${auth.userID}/finance-transactions`), { amount, date, category: categoryRef })
+      const newTransactionRef = await addDoc(collection(firestore, `users-data/${auth.userID}/finance-transactions`), { amount, date, category: categoryRef, description })
       return newTransactionRef.id
     },
     async fetchTransactions() {
@@ -105,6 +105,7 @@ export const useFirebaseStore = defineStore('firebase', {
               amount: data.amount,
               date: data.date,
               category: { id: categoryDoc.id, ...categoryData },
+              description: data.description,
             } as Transaction
           }))
         })
@@ -120,6 +121,7 @@ export const useFirebaseStore = defineStore('firebase', {
               amount: data.amount,
               date: data.date,
               category: { id: categoryDoc.id, ...categoryData },
+              description: data.description,
             } as Transaction
           }))
         })
@@ -136,14 +138,14 @@ export const useFirebaseStore = defineStore('firebase', {
       const transactionRef = doc(firestore, `users-data/${auth.userID}/finance-transactions`, id)
       await deleteDoc(transactionRef)
     },
-    async updateTransaction(id: string, amount: number, date: Date, categoryId: string) {
+    async updateTransaction(id: string, amount: number, date: Date, categoryId: string, description: string) {
       const firestore = useNuxtApp().$firestore
       const auth = useAuth()
       if (!auth)
         throw new Error('User not authenticated')
       const categoryRef = doc(firestore, `users-data/${auth.userID}/finance-category`, categoryId)
       const transactionRef = doc(firestore, `users-data/${auth.userID}/finance-transactions`, id)
-      await updateDoc(transactionRef, { amount, date, category: categoryRef })
+      await updateDoc(transactionRef, { amount, date, category: categoryRef, description })
     },
     async fetchFinanceGoal() {
       const firestore = useNuxtApp().$firestore

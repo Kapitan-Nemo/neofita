@@ -5,7 +5,8 @@ const categories = computed(() => firebaseStore.categories)
 
 const amount = ref<number | null>(null)
 const date = ref(new Date())
-const categoryId = ref<string>('')
+const categoryId = ref('')
+const description = ref('')
 
 const isEditMode = ref(false)
 const selectedTransactionId = ref<string | null>(null)
@@ -18,7 +19,7 @@ async function UpdateTransaction() {
     }
 
     if (isEditMode.value && selectedTransactionId.value) {
-      await firebaseStore.updateTransaction(selectedTransactionId.value, amount.value, new Date(date.value), categoryId.value)
+      await firebaseStore.updateTransaction(selectedTransactionId.value, amount.value, new Date(date.value), categoryId.value, description.value)
     }
 
     clearForm()
@@ -46,6 +47,7 @@ function selectTransaction(transaction: Transaction) {
   date.value = new Date(timestamp)
   categoryId.value = transaction.category.id
   selectedTransactionId.value = transaction.id
+  description.value = transaction.description
   isEditMode.value = true
 }
 
@@ -53,6 +55,7 @@ function clearForm() {
   amount.value = null
   date.value = new Date()
   categoryId.value = ''
+  description.value = ''
   selectedTransactionId.value = null
   isEditMode.value = false
 }
@@ -75,14 +78,17 @@ onMounted(async () => {
       <div class="column">
         Amount
       </div>
+      <div class="column">
+        Description
+      </div>
       <div class="column justify-end">
         Actions
       </div>
     </div>
     <div v-for="t in transactions" :key="t.id" class="row">
       <div class="column flex gap-4">
-        <div v-if="isEditMode && selectedTransactionId === t.id" class="flex items-center w-full gap-[65px]">
-          <select v-model="categoryId" class="w-full min-w-[150px] p-2 text-gray-200 outline-none placeholder-gray-200 border border-gray-100 bg-transparent rounded-lg">
+        <div v-if="isEditMode && selectedTransactionId === t.id" class="flex items-center w-full gap-[50px]">
+          <select v-model="categoryId" class="w-full min-w-[120px] p-2 text-gray-200 outline-none placeholder-gray-200 border border-gray-100 bg-transparent rounded-lg">
             <option v-for="category in categories" :key="category.id" :value="category.id">
               {{ category.name }}
             </option>
@@ -99,7 +105,7 @@ onMounted(async () => {
           >
             <template #default="{ togglePopover }">
               <button
-                class="cursor-pointer flex justify-between w-full min-w-[150px] p-2 text-gray-200 outline-none placeholder-gray-200 border border-gray-100 bg-transparent rounded-lg"
+                class="cursor-pointer flex justify-between w-full min-w-[120px] p-2 text-gray-200 outline-none placeholder-gray-200 border border-gray-100 bg-transparent rounded-lg"
                 @click="togglePopover"
               >
                 {{ formatDate(date, 'string') }}
@@ -112,9 +118,17 @@ onMounted(async () => {
             v-model="amount"
             type="number"
             placeholder="Enter amount"
-            class="w-full min-w-[150px] p-2 text-gray-200 outline-none placeholder-gray-200 border border-gray-100 bg-transparent rounded-lg"
+            class="w-full min-w-[120px] p-2 text-gray-200 outline-none placeholder-gray-200 border border-gray-100 bg-transparent rounded-lg"
+          >
+
+          <input
+            v-model="description"
+            type="text"
+            placeholder="Enter description"
+            class="w-full min-w-[120px] p-2 text-gray-200 outline-none placeholder-gray-200 border border-gray-100 bg-transparent rounded-lg"
           >
         </div>
+
         <div v-else class="flex gap-4 items-center">
           <span class="w-6 h-6 text-xs flex justify-center items-center p-2 rounded-full text-white" :style="{ backgroundColor: t.category.color || '#000' }">
             {{ t.category.name?.trim().charAt(0).toUpperCase() || 'U' }}
@@ -122,12 +136,17 @@ onMounted(async () => {
           <span class="hidden lg:flex">{{ t.category.name || 'Uncategorized' }}</span>
         </div>
       </div>
-      <div class="column">
-        <span v-if="!isEditMode || selectedTransactionId !== t.id">{{ formatDate(t.date, 'string') }}</span>
+
+      <div v-if="!isEditMode || selectedTransactionId !== t.id" class="column">
+        <span>{{ formatDate(t.date, 'string') }}</span>
       </div>
-      <div class="column">
-        <span v-if="!isEditMode || selectedTransactionId !== t.id">{{ t.amount }}</span>
+      <div v-if="!isEditMode || selectedTransactionId !== t.id" class="column">
+        <span>{{ t.amount }}</span>
       </div>
+      <div v-if="!isEditMode || selectedTransactionId !== t.id" class="column">
+        <span>{{ t.description }}</span>
+      </div>
+
       <div class="column flex gap-4 items-center justify-end">
         <span
           v-if="isEditMode && selectedTransactionId === t.id"
