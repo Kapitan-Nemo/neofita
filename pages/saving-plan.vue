@@ -36,9 +36,9 @@ definePageMeta({
           <p class="text-sm text-gray-200 flex items-center">
             <NuxtLink to="/dashboard/">
               Dashboard
-            </NuxtLink> <Icon class="mx-2" name="ion:chevron-forward-outline" /> <NuxtLink to="/saving-plan/">
-              Saving Plan
             </NuxtLink>
+            <Icon class="mx-2" name="ion:chevron-forward-outline" />
+            Saving Plan
           </p>
         </div>
       </div>

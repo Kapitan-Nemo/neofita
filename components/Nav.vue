@@ -39,15 +39,15 @@ onMounted(() => {
         <nuxt-link to="/saving-plan" class="menu-link">
           Saving Plan
         </nuxt-link>
-        <nuxt-link to="/" class="menu-link">
+        <!-- <nuxt-link to="/" class="menu-link">
           Credit Cards
-        </nuxt-link>
-        <nuxt-link to="/" class="menu-link">
+        </nuxt-link> -->
+        <nuxt-link to="/settings" class="menu-link">
           Settings
         </nuxt-link>
-        <nuxt-link to="/" class="menu-link">
+        <!-- <nuxt-link to="/" class="menu-link">
           Account
-        </nuxt-link>
+        </nuxt-link> -->
         <!-- Close icon -->
         <Icon size="30" name="ion:close-outline" class="lg:hidden top-10 absolute right-8" @click="showMenu = !showMenu" />
       </div>
@@ -64,8 +64,10 @@ onMounted(() => {
         </template>
         <template #items>
           <li class="text-gray-200 border-b border-gray-100">
-            <Icon size="20" name="ion:settings-outline" />
-            Settings
+            <nuxt-link to="/settings">
+              <Icon size="20" name="ion:settings-outline" />
+              Settings
+            </nuxt-link>
           </li>
           <li @click="logout()">
             <Icon size="20" name="ion:log-out-outline" />
@@ -87,5 +89,9 @@ onMounted(() => {
 }
 li {
     @apply flex items-center p-4 gap-4 text-gray-200 cursor-pointer hover:text-red;
+  }
+
+  li a {
+    @apply flex items-center gap-4 !border-b-0 !text-gray-200 cursor-pointer hover:!text-red;
   }
 </style>
