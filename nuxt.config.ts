@@ -14,6 +14,18 @@ export default defineNuxtConfig({
     '@samk-dev/nuxt-vcalendar',
     '@nuxt/image',
   ],
+  ssr: true,
+  nitro: {
+    serveStatic: true,
+    firebase: {
+      gen: 2,
+      httpsOptions: {
+        maxInstances: 3,
+      },
+      nodeVersion: '22',
+    },
+  },
+  experimental: { appManifest: false }, // TODO: Enable this when it's stable
   runtimeConfig: {
     public: {
       FIREBASE_APIKEY: process.env.FIREBASE_APIKEY,
@@ -47,4 +59,10 @@ export default defineNuxtConfig({
   css: [
     '~/assets/scss/global.scss',
   ],
+  routeRules: {
+    '/': { prerender: true },
+    '/dashboard': { ssr: true },
+    '/dashboard/manage': { ssr: true },
+    '/saving-plan': { ssr: true },
+  },
 })
