@@ -1,3 +1,4 @@
+import type { NuxtPage } from 'nuxt/schema'
 // Import the process module
 import process from 'node:process'
 
@@ -64,5 +65,6 @@ export default defineNuxtConfig({
     '/dashboard': { ssr: true },
     '/dashboard/manage': { ssr: true },
     '/saving-plan': { ssr: true },
+    '/settings': { ssr: true },
   },
 })

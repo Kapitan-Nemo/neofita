@@ -1,3 +1,5 @@
+import type { DirectiveBinding } from 'vue'
+
 export function expandHexColor(hex: string): string {
   if (hex.length === 4) {
     return `#${hex[1]}${hex[1]}${hex[2]}${hex[2]}${hex[3]}${hex[3]}`
@@ -22,4 +24,25 @@ export function formatDate(input: Timestamp | Date, formatType: FormatType = 'da
   }
 
   return date
+}
+
+export function formatNumber(value: number): string {
+  return Number(value).toLocaleString('pl-PL', { minimumFractionDigits: 0, maximumFractionDigits: 0 }).replace(/,/g, ' ')
+}
+
+let isFormatting = false
+
+export function formatNumberInput(event: Event): void {
+  if (isFormatting)
+    return
+
+  isFormatting = true
+  const target = event.target as HTMLInputElement
+  let value = target.value.replace(/\s+/g, '').replace(/,/g, '.')
+  if (!Number.isNaN(Number(value)) && value !== '') {
+    value = formatNumber(Number(value))
+    target.value = value
+    target.dispatchEvent(new Event('input'))
+  }
+  isFormatting = false
 }

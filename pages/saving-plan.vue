@@ -2,6 +2,9 @@
 const firebaseStore = useFirebaseStore()
 const financeGoal = computed(() => firebaseStore.financeGoal)
 
+const collected = ref(formatNumber(financeGoal.value.collected))
+const goal = ref(formatNumber(financeGoal.value.goal))
+
 function putFinanceGoal() {
   try {
     if (!financeGoal.value.collected || !financeGoal.value.goal) {
@@ -9,7 +12,10 @@ function putFinanceGoal() {
       return
     }
 
-    firebaseStore.updateFinanceGoal(financeGoal.value.collected, financeGoal.value.goal, financeGoal.value.description)
+    const collectedNumber = Number.parseFloat(collected.value.replace(/\s/g, '').replace(/,/g, ''))
+    const goalNumber = Number.parseFloat(goal.value.replace(/\s/g, '').replace(/,/g, ''))
+
+    firebaseStore.updateFinanceGoal(collectedNumber, goalNumber, financeGoal.value.description)
     useToast('Finance goal updated successfully', 'success')
   }
   catch (error: any) {
@@ -51,9 +57,10 @@ definePageMeta({
                   Collected amount
                 </p>
                 <input
-                  v-model.number="financeGoal.collected"
+                  v-model="collected"
                   placeholder="Enter amount"
                   class="w-full min-w-[150px] p-2 mb-2 text-gray-200 outline-none placeholder-gray-200 border border-gray-100 bg-transparent rounded-lg"
+                  @input="formatNumberInput"
                 >
               </div>
               <div class="w-full lg:w-1/2">
@@ -61,9 +68,10 @@ definePageMeta({
                   Goal amount
                 </p>
                 <input
-                  v-model.number="financeGoal.goal"
+                  v-model="goal"
                   placeholder="Enter amount"
                   class="w-full min-w-[150px] p-2 mb-2 text-gray-200 outline-none placeholder-gray-200 border border-gray-100 bg-transparent rounded-lg"
+                  @input="formatNumberInput"
                 >
               </div>
             </div>

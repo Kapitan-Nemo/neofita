@@ -31,12 +31,6 @@ const glob = import.meta.glob('@/assets/img/playlist/*.jpg', { eager: true }) as
 const images = Object.fromEntries(
   Object.entries(glob).map(([key, value]) => [filename(key), value.default]),
 )
-
-// Computed property to get a random song
-const randomSong = computed(() => {
-  const randomIndex = Math.floor(Math.random() * playlist.length)
-  return playlist[randomIndex]
-})
 </script>
 
 <template>
@@ -44,17 +38,17 @@ const randomSong = computed(() => {
     <div class="flex flex-row gap-6">
       <div class="flex flex-col gap-4">
         <h2 class="text-2xl">
-          {{ randomSong.title }}
+          {{ playlist[0].title }}
         </h2>
         <p class="text-sm text-gray-200">
-          {{ randomSong.subtitle }}
+          {{ playlist[0].subtitle }}
         </p>
-        <a :href="randomSong.link" target="blank" class="self-start inline-flex px-4 py-2 text-sm border border-gray-100 text-white rounded">
+        <a :href="playlist[0].link" target="blank" class="self-start inline-flex px-4 py-2 text-sm border border-gray-100 text-white rounded">
           Listen
         </a>
       </div>
 
-      <img :src="images[randomSong.image.replace('.jpg', '')]" alt="" class="rounded-lg w-40 h-40 object-cover">
+      <img :src="images[playlist[0].image.replace('.jpg', '')]" alt="" class="rounded-lg w-40 h-40 object-cover">
     </div>
   </div>
 </template>

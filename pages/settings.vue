@@ -23,7 +23,7 @@ const auth = useAuth()
         </div>
       </div>
       <div class="flex-col lg:flex-row flex gap-6 py-6">
-        <Tile class="w-full" subtitle="Your personal information" title="User settings">
+        <Tile subtitle="Your personal information" title="User settings">
           <div class="flex flex-col gap-4">
             <p>
               Name: <span class="ml-4 inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-red-100 text-red-800">{{ auth.userName }}</span>

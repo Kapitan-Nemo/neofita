@@ -26,7 +26,7 @@ onMounted(async () => {
   <div>
     <div class="flex items-center justify-between">
       <p class="text-2xl mb-2">
-        {{ financeGoal.collected }}<span class="text-sm text-gray-200"><span class="mx-1">of</span>{{ financeGoal.goal }} </span>
+        {{ formatNumber(financeGoal.collected) }}<span class="text-sm text-gray-200"><span class="mx-1">of</span>{{ formatNumber(financeGoal.goal) }} </span>
       </p>
       <small class="text-green">{{ sliderValue.toFixed(2) }}% Completed </small>
     </div>
