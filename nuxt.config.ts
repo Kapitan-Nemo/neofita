@@ -26,7 +26,7 @@ export default defineNuxtConfig({
       nodeVersion: '22',
     },
   },
-  experimental: { appManifest: false }, // TODO: Enable this when it's stable
+  experimental: { appManifest: true },
   runtimeConfig: {
     public: {
       FIREBASE_APIKEY: process.env.FIREBASE_APIKEY,
