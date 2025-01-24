@@ -26,7 +26,7 @@ export default defineNuxtConfig({
       nodeVersion: '22',
     },
   },
-  experimental: { appManifest: true },
+  experimental: { appManifest: false },
   runtimeConfig: {
     public: {
       FIREBASE_APIKEY: process.env.FIREBASE_APIKEY,
