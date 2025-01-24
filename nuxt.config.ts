@@ -1,4 +1,3 @@
-import type { NuxtPage } from 'nuxt/schema'
 // Import the process module
 import process from 'node:process'
 
