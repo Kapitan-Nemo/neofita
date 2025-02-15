@@ -21,6 +21,7 @@ export default defineNuxtConfig({
       gen: 2,
       httpsOptions: {
         maxInstances: 3,
+        region: 'europe-west1',
       },
       nodeVersion: '22',
     },

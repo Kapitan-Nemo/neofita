@@ -39,16 +39,9 @@ onMounted(() => {
         <nuxt-link to="/saving-plan" class="menu-link">
           Saving Plan
         </nuxt-link>
-        <!-- <nuxt-link to="/" class="menu-link">
-          Credit Cards
-        </nuxt-link> -->
         <nuxt-link to="/settings" class="menu-link">
           Settings
         </nuxt-link>
-        <!-- <nuxt-link to="/" class="menu-link">
-          Account
-        </nuxt-link> -->
-        <!-- Close icon -->
         <Icon size="30" name="ion:close-outline" class="lg:hidden top-10 absolute right-8" @click="showMenu = !showMenu" />
       </div>
 

@@ -48,9 +48,9 @@ definePageMeta({
         </Tile>
       </div>
       <div class="lg:w-1/3 w-full flex flex-col gap-6">
-        <Tile class="flex flex-col" title="Saving Goal" link="/saving-plan" link-text="Manage">
+        <!-- <Tile class="flex flex-col" title="Saving Goal" link="/saving-plan" link-text="Manage">
           <ChartRange />
-        </Tile>
+        </Tile> -->
 
         <Tile class="bg-[#191919]">
           <ChartPlaylist />

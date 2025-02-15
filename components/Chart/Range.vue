@@ -6,8 +6,8 @@ const sliderValue = computed(() => {
   return (financeGoal.collected / financeGoal.goal) * 100
 })
 
-function setCSSProgress(progress) {
-  const progressBar = document.querySelector('.progress-bar')
+function setCSSProgress(progress: number) {
+  const progressBar = document.querySelector('.progress-bar') as HTMLElement
   if (progressBar) {
     progressBar.style.setProperty('--ProgressPercent', `${progress}%`)
   }

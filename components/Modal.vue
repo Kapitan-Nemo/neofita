@@ -22,7 +22,3 @@ function handleBackgroundClick(event: MouseEvent) {
     </div>
   </Teleport>
 </template>
-
-<style scoped>
-/* Add any additional styling here */
-</style>
