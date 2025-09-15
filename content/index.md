@@ -1,3 +1,6 @@
-# My First Page
+---
+title: "Index"
+description: "Description for Index"
+---
 
-Here is some content. Ala ma kota
+<p>Welcome to my webiste</p>
