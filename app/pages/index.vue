@@ -8,9 +8,9 @@ useSeoMeta({
 </script>
 
 <template>
-  <div>
+  <main class="container mx-auto px-4 flex-1 flex flex-col">
     <slot />
-    <ContentRenderer v-if="home" :value="home" />
-    <div v-else>Home not found</div>
-  </div>
+    <ContentRenderer v-if="home" :value="home" class="flex-1" />
+    <div v-else class="flex-1">Home not found</div>
+  </main>
 </template>

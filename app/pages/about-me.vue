@@ -8,8 +8,8 @@ useSeoMeta({
 </script>
 
 <template>
-  <div>
+  <main class="container mx-auto px-4">
     <ContentRenderer v-if="aboutMe" :value="aboutMe" />
     <div v-else>Page not found</div>
-  </div>
+  </main>
 </template>
