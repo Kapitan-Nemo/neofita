@@ -3,4 +3,9 @@ title: "News"
 description: "Description for News"
 ---
 
-<p>Hello FROM NEWS</p>
+# News
+
+<p>Hello FROM NEWSsss</p>
+
+::news-tile
+::
