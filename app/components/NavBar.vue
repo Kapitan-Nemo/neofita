@@ -10,13 +10,13 @@
                 <NuxtLink to="/" class="hover:underline">Home</NuxtLink>
             </li>
             <li class="px-4 border-r border-gray-300 last:border-r-0">
-                <NuxtLink to="/about-me" class="hover:underline">About Me</NuxtLink>
+                <NuxtLink to="/about-me/" class="hover:underline">About Me</NuxtLink>
             </li>
             <li class="px-4 border-r border-gray-300 last:border-r-0">
-                <NuxtLink to="/news" class="hover:underline">News</NuxtLink>
+                <NuxtLink to="/news/" class="hover:underline">News</NuxtLink>
             </li>
             <li class="px-4 border-r border-gray-300 last:border-r-0">
-                <NuxtLink to="/plugins" class="hover:underline">Plugins</NuxtLink>
+                <NuxtLink to="/plugins/" class="hover:underline">Plugins</NuxtLink>
             </li>
         </ul>
     </nav>
