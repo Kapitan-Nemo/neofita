@@ -11,7 +11,7 @@
                 </div>
 
                 <!-- Navigation -->
-                <nav aria-label="Main navigation" class="font-haksen">
+                <nav aria-label="Main navigation">
                     <ul class="flex items-center gap-2">
                         <li>
                             <NuxtLink to="/" class="px-5 py-2 rounded-full text-lg font-medium transition-all duration-300 hover:bg-white/50 dark:hover:bg-gray-800/50 hover:shadow-lg hover:scale-105 active:scale-95">

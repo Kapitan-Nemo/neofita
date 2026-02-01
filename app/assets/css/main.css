@@ -1,15 +1,6 @@
 @import "tailwindcss";
 
 @font-face {
-    font-family: 'HAKSEN';
-    src: url('~/assets/fonts/haksen/HAKSEN.otf') format('opentype'),
-        url('~/assets/fonts/haksen/HAKSEN.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
-}
-
-@font-face {
     font-family: "Montserrat";
     src: url('../fonts/montserrat/Montserrat-Regular.woff') format('woff');
     font-weight: normal;
@@ -18,7 +9,6 @@
 }
 
 @theme {
-    --font-haksen: HAKSEN, sans-serif;
     --font-montserrat: Montserrat, sans-serif;
     --font-body: Montserrat, sans-serif;
 }

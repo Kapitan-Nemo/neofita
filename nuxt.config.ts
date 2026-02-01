@@ -11,12 +11,6 @@ export default defineNuxtConfig({
     ],
   },
 
-  fonts: {
-    families: [
-      { name: 'HAKSEN', provider: 'local' }
-    ]
-  },
-
   modules: [
     '@nuxt/content',
     '@nuxt/eslint',
