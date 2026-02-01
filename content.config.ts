@@ -5,8 +5,10 @@ export default defineContentConfig({
   collections: {
     content: defineCollection({
       type: 'page',
-      source: '**/*.md',
-      exclude: ['blog/**']
+      source: {
+        include: '**/*.md',
+        exclude: ['blog/**']
+      }
     }),
     blog: defineCollection({
       type: 'page',
